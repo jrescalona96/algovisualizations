@@ -1,25 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import SortingPage from "./components/sortingPage/sortingPage";
+import NavBar from "./components/navbar/navbar";
+import { Container } from "@material-ui/core";
+import "./App.scss";
+
+const title = "algovisualizations";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <NavBar title={title} />
+      <Container>
+        <SortingPage />
+      </Container>
+    </main>
   );
 }
 
