@@ -5,21 +5,20 @@ import { generateData } from "../../services/testData/data";
 import * as sort from "../sortingPage/algorithms/algorithms";
 
 function SortingPage(props) {
-  const [data, setData] = useState(generateData());
-  const [speed, setSpeed] = useState(0.05);
+  const [dataCount, setDataCount] = useState(100);
+  const [data, setData] = useState(generateData(dataCount));
+  const [speed, setSpeed] = useState(0);
 
-  const handleSort = () => {
-    const iterations = sort.bubbleSort(data);
-    visualize(iterations, 0);
+  const handleSort = async () => {
+    const snapshots = sort.bubbleSort(data);
+    visualize(snapshots, 0);
   };
 
-  const visualize = (iterations, index) => {
-    let data = [...iterations[index].info];
-
+  const visualize = (snapshots, index) => {
+    const { snapshot: data } = snapshots[index];
     setData(data);
-
     setTimeout(() => {
-      if (index < iterations.length - 1) visualize(iterations, index + 1);
+      if (index < snapshots.length - 1) visualize(snapshots, index + 1);
     }, speed);
   };
 
@@ -41,7 +40,11 @@ function SortingPage(props) {
         colorType="linear"
         colorRange={["blue", "orange"]}
       >
-        <VerticalBarSeries data={data} {...props} />
+        <VerticalBarSeries
+          data={data}
+          {...props}
+          style={{ mark: { stroke: "white" } }}
+        />
       </XYPlot>
     </React.Fragment>
   );
