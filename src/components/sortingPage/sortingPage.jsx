@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { generateData } from "../../services/testData/data";
 import { bubbleSort } from "../../algorithms/bubbleSort";
 import { Grid } from "@material-ui/core";
-
-import CustomSlider from "../common/customSlider";
-
 import Chart from "../common/chart";
 import SortMenu from "../sortingPage/sortMenu";
 import SortOptions from "./sortOptions";
@@ -28,17 +25,18 @@ function SortingPage(props) {
   const [data, setData] = useState(generateData(dataCount));
   const [speed, setSpeed] = useState(0);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[0]);
-  const maxDataCount = 250;
+  const [timer, setTimer] = useState(0);
 
   const visualize = (snapshots, index) => {
     const { snapshot: data } = snapshots[index];
     setData(data);
-    setTimeout(() => {
-      if (index < snapshots.length - 1) {
-        visualize(snapshots, index + 1);
-      }
-    }, speed);
+    setTimer(
+      setTimeout(() => {
+        if (index < snapshots.length - 1) visualize(snapshots, index + 1);
+      }, speed)
+    );
   };
+  const stopTimer = () => clearTimeout(timer);
 
   const handleStart = () => {
     const iterations = selectedAlgorithm.run(data);
@@ -46,6 +44,7 @@ function SortingPage(props) {
   };
 
   const handleChangeDataCount = (event, value) => {
+    stopTimer();
     setDataCount(value);
   };
 
@@ -59,6 +58,7 @@ function SortingPage(props) {
   };
 
   const handleChangeSpeed = (_, value) => {
+    stopTimer();
     setSpeed(value);
   };
 
