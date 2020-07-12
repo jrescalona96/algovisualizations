@@ -7,6 +7,7 @@ import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import CustomSlider from "../common/customSlider";
 import CustomMenu from "../common/customMenu";
 import Chart from "../common/chart";
+import _ from "lodash";
 
 const algorithms = [
   {
@@ -53,7 +54,8 @@ function SortingPage(props) {
   };
 
   const handleSetAlgorithm = (_id) => {
-    console.log(_id);
+    const algorithm = algorithms.find((item) => item._id === _id);
+    setAlgorithm(algorithm);
   };
 
   const handleChangeSpeed = (_, value) => {
@@ -87,7 +89,11 @@ function SortingPage(props) {
         <Grid item align="end" xs={12} sm={6}>
           <Typography variant="h2">{algorithm.name}</Typography>
           <Grid container justify="flex-end">
-            <CustomMenu options={algorithms} />
+            <CustomMenu
+              options={algorithms}
+              onSelect={(_id) => handleSetAlgorithm(_id)}
+              name="Algorithm"
+            />
             <Box ml={1}>
               <Button
                 l={2}

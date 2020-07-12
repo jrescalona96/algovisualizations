@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Menu, MenuItem, Button } from "@material-ui/core";
 import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 
-function CustomMenu(props) {
+function CustomMenu({ options, name, onSelect }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -13,28 +13,37 @@ function CustomMenu(props) {
     setAnchorEl(null);
   };
 
+  const handleSelect = (_id) => {
+    onSelect(_id);
+    handleClose();
+  };
+
   return (
     <React.Fragment>
       <Button
         variant="contained"
         color="primary"
-        aria-controls="simple-menu"
+        aria-controls={name}
         aria-haspopup="true"
         onClick={handleClick}
         startIcon={<SwapHorizIcon />}
       >
-        Algorithm
+        {name}
       </Button>
       <Menu
-        id="simple-menu"
+        id={name}
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        {options.map((item) => {
+          return (
+            <MenuItem key={item._id} onClick={() => handleSelect(item._id)}>
+              {item.name}
+            </MenuItem>
+          );
+        })}
       </Menu>
     </React.Fragment>
   );
