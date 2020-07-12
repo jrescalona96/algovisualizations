@@ -1,6 +1,6 @@
 import React from "react";
 import SortingPage from "./components/sortingPage/sortingPage";
-import NavBar from "./components/navbar/navbar";
+import NavBar from "./components/navbar";
 import { Container } from "@material-ui/core";
 import "./App.scss";
 
