@@ -1,51 +1,107 @@
 import React, { useState } from "react";
-import { Typography, Button, Grid } from "@material-ui/core";
-import { XYPlot, VerticalBarSeries } from "react-vis";
 import { generateData } from "../../services/testData/data";
-import * as sort from "../sortingPage/algorithms/algorithms";
+import { bubbleSort } from "../../algorithms/bubbleSort";
+import { Typography, Grid, Button, Box } from "@material-ui/core";
+import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import CustomSlider from "../common/customSlider";
+import CustomMenu from "../common/customMenu";
+import Chart from "../common/chart";
+
+const algorithms = [
+  {
+    _id: "bubble_sort",
+    name: "Bubble Sort",
+    run: bubbleSort,
+  },
+  {
+    _id: "selection_sort",
+    name: "Selection Sort",
+    run: bubbleSort,
+  },
+  { _id: "quick_sort", name: "Quick Sort", run: bubbleSort },
+];
 
 function SortingPage(props) {
   const [dataCount, setDataCount] = useState(100);
   const [data, setData] = useState(generateData(dataCount));
   const [speed, setSpeed] = useState(0);
-
-  const handleSort = async () => {
-    const snapshots = sort.bubbleSort(data);
-    visualize(snapshots, 0);
-  };
+  const [algorithm, setAlgorithm] = useState(algorithms[0]);
+  const maxDataCount = 250;
 
   const visualize = (snapshots, index) => {
     const { snapshot: data } = snapshots[index];
     setData(data);
     setTimeout(() => {
-      if (index < snapshots.length - 1) visualize(snapshots, index + 1);
+      if (index < snapshots.length - 1) {
+        visualize(snapshots, index + 1);
+      }
     }, speed);
+  };
+
+  const handleStart = () => {
+    const iterations = algorithm.run(data);
+    visualize(iterations, 0);
+  };
+
+  const handleChangeDataCount = (event, value) => {
+    setDataCount(value);
+  };
+
+  const handleSetDataCount = () => {
+    setData(generateData(dataCount));
+  };
+
+  const handleSetAlgorithm = (_id) => {
+    console.log(_id);
+  };
+
+  const handleChangeSpeed = (_, value) => {
+    setSpeed(value);
   };
 
   return (
     <React.Fragment>
-      <Grid container justify="space-between" alignItems="center">
-        <Grid item>
-          <Typography variant="h2">Bubble Sort</Typography>
+      <Chart data={data} />
+
+      <Grid container justify="space-between">
+        <Grid item xs={12} sm={6}>
+          <CustomSlider
+            title="Visualization Speed"
+            maxValue={1000}
+            onChange={handleChangeSpeed}
+            value={speed}
+            max={maxDataCount}
+          />
+          <CustomSlider
+            title="Data Set Count"
+            maxValue={maxDataCount}
+            onChange={handleChangeDataCount}
+            onSubmit={handleSetDataCount}
+            value={dataCount}
+            max={maxDataCount}
+            buttonName="Start"
+          />
         </Grid>
-        <Grid item>
-          <Button variant="contained" color="primary" onClick={handleSort}>
-            Start Sort
-          </Button>
+
+        <Grid item align="end" xs={12} sm={6}>
+          <Typography variant="h2">{algorithm.name}</Typography>
+          <Grid container justify="flex-end">
+            <CustomMenu options={algorithms} />
+            <Box ml={1}>
+              <Button
+                l={2}
+                variant="contained"
+                color="secondary"
+                onClick={handleStart}
+                startIcon={<PlayCircleOutlineIcon />}
+              >
+                Start
+              </Button>
+            </Box>
+          </Grid>
         </Grid>
       </Grid>
-      <XYPlot
-        height={500}
-        width={1080}
-        colorType="linear"
-        colorRange={["blue", "orange"]}
-      >
-        <VerticalBarSeries
-          data={data}
-          {...props}
-          style={{ mark: { stroke: "white" } }}
-        />
-      </XYPlot>
     </React.Fragment>
   );
 }
