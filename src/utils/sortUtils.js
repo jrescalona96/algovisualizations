@@ -4,18 +4,4 @@ export const swap = (nums, idx1, idx2) => {
   nums[idx2] = temp;
 };
 
-export const record = (data, nodes, snapshots) => {
-  const snapshot = [...data];
-  const focusNodes = [...nodes];
-  const name = `Pass #${snapshots.length}`;
-  const record = [
-    {
-      name,
-      snapshot,
-      focusNodes,
-    },
-  ];
-  return [...snapshots, ...record];
-};
-
-export default { swap, record };
+export default { swap };

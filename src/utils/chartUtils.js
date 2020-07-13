@@ -1,3 +1,17 @@
+export const record = (data, nodes, snapshots) => {
+  const snapshot = [...data];
+  const focusNodes = [...nodes];
+  const name = `Pass #${snapshots.length}`;
+  const record = [
+    {
+      name,
+      snapshot,
+      focusNodes,
+    },
+  ];
+  return [...snapshots, ...record];
+};
+
 export const mapChartData = (snapshots) => {
   return snapshots.map((iter) => {
     let x = 0;
@@ -15,5 +29,3 @@ export const mapChartData = (snapshots) => {
     return { name, snapshot };
   });
 };
-
-export default { mapChartData };

@@ -1,5 +1,5 @@
-import { record, swap } from "../utils/sortUtils";
-import { mapChartData } from "../utils/chartUtils";
+import { swap } from "../utils/sortUtils";
+import { record } from "../utils/chartUtils";
 
 export const bubbleSort = (nums) => {
   const data = [...nums];
@@ -21,5 +21,5 @@ export const bubbleSort = (nums) => {
     current = 0;
     end--;
   }
-  return mapChartData(snapshots);
+  return { data, snapshots };
 };

@@ -1,28 +1,30 @@
 import React, { useState } from "react";
 import { generateData } from "../../services/testData/data";
 import { bubbleSort } from "../../algorithms/bubbleSort";
+import { selectionSort } from "../../algorithms/selectionSort";
 import { Grid } from "@material-ui/core";
 import Chart from "../common/chart";
 import SortMenu from "../sortingPage/sortMenu";
 import SortOptions from "./sortOptions";
+import { runAlgorithm } from "../../utils/algorithmUtil";
 
 const algorithms = [
   {
     _id: "bubble_sort",
     name: "Bubble Sort",
-    run: bubbleSort,
+    algorithm: bubbleSort,
   },
   {
     _id: "selection_sort",
     name: "Selection Sort",
-    run: bubbleSort,
+    algorithm: selectionSort,
   },
   {
     _id: "merge_sort",
     name: "Merge Sort",
-    run: bubbleSort,
+    algorithm: bubbleSort,
   },
-  { _id: "quick_sort", name: "Quick Sort", run: bubbleSort },
+  { _id: "quick_sort", name: "Quick Sort", algorithm: bubbleSort },
 ];
 
 function SortingPage(props) {
@@ -47,7 +49,7 @@ function SortingPage(props) {
 
   const handleStart = () => {
     if (iterations.length === 0) {
-      const it = selectedAlgorithm.run(data);
+      const it = runAlgorithm(selectedAlgorithm.algorithm, data);
       setIterations(it);
       visualize(it, 0);
     } else {
