@@ -8,7 +8,7 @@ export const selectionSort = (nums) => {
   let end = nums.length - 1;
   let minIdx = 0;
 
-  while (start < end) {
+  while (start <= end) {
     minIdx = start;
     snapshots = record(data, [start, minIdx], snapshots);
     for (let i = start; i <= end; i++) {

@@ -11,7 +11,7 @@ function SortMenu({
 }) {
   return (
     <React.Fragment>
-      <Typography variant="h2">{selectedAlgorithm.name}</Typography>
+      <Typography variant="h3">{selectedAlgorithm.name}</Typography>
       <Grid container justify="flex-end">
         <CustomMenu
           options={algorithms}

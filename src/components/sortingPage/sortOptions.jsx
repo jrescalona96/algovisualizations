@@ -24,7 +24,7 @@ function SortOptions({
         onChange={onChangeDataCount}
         onSubmit={onSetDataCount}
         value={dataCount}
-        buttonName="Start"
+        buttonLabel="Reset"
       />
     </React.Fragment>
   );

@@ -27,7 +27,7 @@ const algorithms = [
   { _id: "quick_sort", name: "Quick Sort", algorithm: bubbleSort },
 ];
 
-function SortingPage(props) {
+function SortingPage() {
   const [dataCount, setDataCount] = useState(10);
   const [data, setData] = useState(generateData(dataCount));
   const [speed, setSpeed] = useState(200);
@@ -59,19 +59,19 @@ function SortingPage(props) {
 
   const handleChangeDataCount = (_, value) => {
     stopTimer();
-    setIterations([]);
     setDataCount(value);
   };
 
   const handleSetDataCount = () => {
     stopTimer();
-    setData(generateData(dataCount));
+    reset();
   };
 
   const handleSetSelectedAlgorithm = (_id) => {
     stopTimer();
     const selectedAlgorithm = algorithms.find((item) => item._id === _id);
     setSelectedAlgorithm(selectedAlgorithm);
+    reset();
   };
 
   const handleChangeSpeed = (_, value) => {
@@ -79,6 +79,10 @@ function SortingPage(props) {
     setSpeed(value);
   };
 
+  const reset = () => {
+    setIterations([]);
+    setData(generateData(dataCount));
+  };
   return (
     <React.Fragment>
       <Chart data={data} />
