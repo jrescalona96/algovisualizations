@@ -21,9 +21,9 @@ export const mapChartData = (snapshots) => {
         _id: data._id,
         x: x++,
         y: data.y,
-        color: data.x,
         size: data.y,
-        opacity: data.y,
+        color: iter.focusNodes.includes(data._id) ? 255 : 150,
+        opacity: iter.focusNodes.includes(data._id) ? 1 : 0.5,
       };
     });
     return { name, snapshot };
