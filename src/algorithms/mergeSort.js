@@ -1,41 +1,80 @@
-import { swap } from "../utils/sortUtils";
 import { record } from "../utils/chartUtils";
 
 let snapshots = [];
+let data = [];
 
 export const mergeSort = (nums) => {
-  const data = _divideThenMerge(nums);
+  data = [...nums];
+  _mergeSort(0, data.length - 1);
+  snapshots = record(data, _getFocusNodes([]), snapshots);
   return { data, snapshots };
 };
 
-const _divideThenMerge = (nums) => {
-  let data = [...nums];
-  if (data.length === 1) return data;
-  else if (data.length === 2) {
-    if (data[0].y > data[1].y) data = swap(data, 0, 1);
-    return data;
-  } else {
-    const mid = data.length / 2;
-    const left = _divideThenMerge(data.splice(0, mid));
-    const right = _divideThenMerge(data.splice(mid + 1, data.length - 1));
-    console.log(left, right);
-    data = _merge(left, right);
+const _mergeSort = (start, end) => {
+  const size = end - start + 1;
+  const mid = Math.floor(start + (end - start + 1) / 2);
+  snapshots = record(data, _getFocusNodes([mid]), snapshots);
+  if (size > 2) {
+    _mergeSort(start, mid);
+    _mergeSort(mid + 1, end);
+    _merge(start, mid, mid + 1, end);
+  } else if (size === 2) {
+    if (data[start].y > data[end].y) _swap(start, end);
   }
-
-  return data;
+  snapshots = record(data, _getFocusNodes([mid]), snapshots);
+  return;
 };
 
-const _merge = (l, r) => {
-  let left = [...l];
-  let right = [...r];
-  let data = [];
-  let leftItem = left.shift();
-  let rightItem = right.shift();
-  while (left.length > 0) {
-    if (leftItem < rightItem) data.push(leftItem);
-    else data.push(rightItem);
-    leftItem = left.shift();
-    rightItem = right.shift();
+const _getFocusNodes = (indices) => {
+  return indices.map((index) => data[index]._id);
+};
+
+const _merge = (leftStart, leftEnd, rightStart, rightEnd) => {
+  let temp = [];
+  let leftCurrent = leftStart;
+  let rightCurrent = rightStart;
+  let index = 0;
+
+  while (leftCurrent <= leftEnd && rightCurrent <= rightEnd) {
+    if (data[leftCurrent].y < data[rightCurrent].y) {
+      snapshots = record(
+        data,
+        _getFocusNodes([leftCurrent, rightCurrent]),
+        snapshots
+      );
+      temp[index] = data[leftCurrent];
+      leftCurrent++;
+    } else {
+      snapshots = record(
+        data,
+        _getFocusNodes([leftCurrent, rightCurrent]),
+        snapshots
+      );
+      temp[index] = data[rightCurrent];
+      rightCurrent++;
+    }
+    index++;
   }
-  return [...data, ...right];
+
+  // add remaining values
+  temp = [
+    ...temp,
+    ...data.slice(leftCurrent, leftEnd + 1),
+    ...data.slice(rightCurrent, rightEnd + 1),
+  ];
+
+  index = leftStart;
+  for (let i = 0; i < temp.length; i++) {
+    data[index] = temp[i];
+    index++;
+  }
+
+  return;
+};
+
+const _swap = (idx1, idx2) => {
+  let temp = data[idx1];
+  data[idx1] = data[idx2];
+  data[idx2] = temp;
+  return data;
 };

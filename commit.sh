@@ -9,4 +9,4 @@ printf "\n====================== merged changes ============================\n"
 git push
 printf "\n====================== pushed changes ============================\n"
 git checkout dev
-printf "All Done!!"
+printf "\n\nAll Done!!\n\n"

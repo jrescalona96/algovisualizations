@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { generateData } from "../../services/testData/data";
 import { bubbleSort } from "../../algorithms/bubbleSort";
 import { selectionSort } from "../../algorithms/selectionSort";
+import { mergeSort } from "../../algorithms/mergeSort";
 import { Grid } from "@material-ui/core";
 import Chart from "../common/chart";
 import SortMenu from "../sortingPage/sortMenu";
@@ -22,7 +23,7 @@ const algorithms = [
   {
     _id: "merge_sort",
     name: "Merge Sort",
-    algorithm: bubbleSort,
+    algorithm: mergeSort,
   },
   { _id: "quick_sort", name: "Quick Sort", algorithm: bubbleSort },
 ];
