@@ -14,7 +14,6 @@ function Chart({ data }) {
               fontWeight: "bold",
             }}
             labelAnchorX="middle"
-            animation
             data={data}
             getLabel={(d) => d.y}
           />

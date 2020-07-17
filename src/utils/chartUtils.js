@@ -24,7 +24,6 @@ export const mapChartData = (snapshots) => {
         size: data.y,
         color: iter.focusNodes.includes(data._id) ? 255 : 150,
         opacity: iter.focusNodes.includes(data._id) ? 1 : 0.5,
-        stroke: { color: "black", width: 5 },
       };
     });
     return { name, snapshot };

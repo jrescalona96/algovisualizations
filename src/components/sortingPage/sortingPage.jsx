@@ -3,7 +3,8 @@ import { generateData } from "../../services/testData/data";
 import { bubbleSort } from "../../algorithms/bubbleSort";
 import { selectionSort } from "../../algorithms/selectionSort";
 import { mergeSort } from "../../algorithms/mergeSort";
-import { Grid } from "@material-ui/core";
+import { insertionSort } from "../../algorithms/insertionSort";
+import { Grid, Typography } from "@material-ui/core";
 import Chart from "../common/chart";
 import SortMenu from "../sortingPage/sortMenu";
 import SortOptions from "./sortOptions";
@@ -21,6 +22,11 @@ const algorithms = [
     algorithm: selectionSort,
   },
   {
+    _id: "insertion_sort",
+    name: "Insertion Sort",
+    algorithm: insertionSort,
+  },
+  {
     _id: "merge_sort",
     name: "Merge Sort",
     algorithm: mergeSort,
@@ -34,14 +40,18 @@ function SortingPage() {
   const [speed, setSpeed] = useState(200);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[0]);
   const [timer, setTimer] = useState(0);
-  const [iterations, setIterations] = useState([]);
+  const [comparisons, setComparisons] = useState(0);
 
   const visualize = (snapshots, index) => {
+    setComparisons(index);
     const { snapshot } = snapshots[index];
     setData(snapshot);
+
     setTimer(
       setTimeout(() => {
-        if (index < snapshots.length - 1) visualize(snapshots, index + 1);
+        if (index < snapshots.length - 1) {
+          visualize(snapshots, index + 1);
+        }
       }, speed)
     );
   };
@@ -49,14 +59,9 @@ function SortingPage() {
   const stopTimer = () => clearTimeout(timer);
 
   const handleStart = () => {
-    if (iterations.length === 0) {
-      const it = runAlgorithm(selectedAlgorithm.algorithm, data);
-      setIterations(it);
-      visualize(it, 0);
-    } else {
-      visualize(iterations, 0);
-      reset();
-    }
+    stopTimer();
+    const iter = runAlgorithm(selectedAlgorithm.algorithm, data);
+    visualize(iter, 0);
   };
 
   const handleChangeDataCount = (_, value) => {
@@ -82,11 +87,13 @@ function SortingPage() {
   };
 
   const reset = () => {
-    setIterations([]);
-    setData(generateData(dataCount));
+    const data = generateData(dataCount);
+    setData(data);
   };
+
   return (
     <React.Fragment>
+      <Typography variant="h1">{comparisons}</Typography>
       <Chart data={data} />
       <Grid container justify="space-between">
         <Grid item xs={12} sm={6}>

@@ -1,6 +1,8 @@
 import { swap } from "../utils/sortUtils";
 import { record } from "../utils/chartUtils";
 
+let snapshots = [];
+
 export const selectionSort = (nums) => {
   return nums.length < 100
     ? _selectionSortSmall(nums)
@@ -8,7 +10,6 @@ export const selectionSort = (nums) => {
 };
 
 const _selectionSortSmall = (nums) => {
-  let snapshots = [];
   let data = [...nums];
   let start = 0;
   let end = nums.length - 1;
@@ -17,16 +18,19 @@ const _selectionSortSmall = (nums) => {
   while (start <= end) {
     minIdx = start;
     for (let i = start; i <= end; i++) {
+      if (data[i].y < data[minIdx].y) minIdx = i;
+
       snapshots = record(
         data,
-        [data[minIdx]._id, data[i]._id, data[start]._id],
+        [data[minIdx], data[i], data[start]],
+
         snapshots
       );
-      if (data[i].y < data[minIdx].y) minIdx = i;
     }
     data = swap(data, start, minIdx);
     start++;
   }
+
   snapshots = record(data, data, snapshots);
   return { data, snapshots };
 };
