@@ -55,6 +55,7 @@ function SortingPage() {
       visualize(it, 0);
     } else {
       visualize(iterations, 0);
+      reset();
     }
   };
 

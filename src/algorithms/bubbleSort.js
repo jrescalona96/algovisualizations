@@ -11,11 +11,7 @@ export const bubbleSort = (nums) => {
   while (!sorted) {
     sorted = true;
     while (current < end) {
-      snapshots = record(
-        data,
-        [data[current]._id, data[current + 1]._id],
-        snapshots
-      );
+      snapshots = record(data, [data[current], data[current + 1]], snapshots);
       if (data[current].y > data[current + 1].y) {
         data = swap(data, current, current + 1);
         sorted = false;
@@ -25,5 +21,6 @@ export const bubbleSort = (nums) => {
     current = 0;
     end--;
   }
+  snapshots = record(data, data, snapshots);
   return { data, snapshots };
 };

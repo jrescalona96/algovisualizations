@@ -6,14 +6,14 @@ let data = [];
 export const mergeSort = (nums) => {
   data = [...nums];
   _mergeSort(0, data.length - 1);
-  snapshots = record(data, _getFocusNodes([]), snapshots);
+  snapshots = record(data, data, snapshots);
   return { data, snapshots };
 };
 
 const _mergeSort = (start, end) => {
   const size = end - start + 1;
   const mid = Math.floor(start + (end - start + 1) / 2);
-  snapshots = record(data, _getFocusNodes([mid]), snapshots);
+  snapshots = record(data, [data[mid]], snapshots);
   if (size > 2) {
     _mergeSort(start, mid);
     _mergeSort(mid + 1, end);
@@ -21,12 +21,8 @@ const _mergeSort = (start, end) => {
   } else if (size === 2) {
     if (data[start].y > data[end].y) _swap(start, end);
   }
-  snapshots = record(data, _getFocusNodes([mid]), snapshots);
+  snapshots = record(data, [data[mid]], snapshots);
   return;
-};
-
-const _getFocusNodes = (indices) => {
-  return indices.map((index) => data[index]._id);
 };
 
 const _merge = (leftStart, leftEnd, rightStart, rightEnd) => {
@@ -39,7 +35,7 @@ const _merge = (leftStart, leftEnd, rightStart, rightEnd) => {
     if (data[leftCurrent].y < data[rightCurrent].y) {
       snapshots = record(
         data,
-        _getFocusNodes([leftCurrent, rightCurrent]),
+        [data[leftCurrent], data[rightCurrent]],
         snapshots
       );
       temp[index] = data[leftCurrent];
@@ -47,7 +43,7 @@ const _merge = (leftStart, leftEnd, rightStart, rightEnd) => {
     } else {
       snapshots = record(
         data,
-        _getFocusNodes([leftCurrent, rightCurrent]),
+        [data[leftCurrent], data[rightCurrent]],
         snapshots
       );
       temp[index] = data[rightCurrent];

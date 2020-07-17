@@ -27,7 +27,7 @@ const _selectionSortSmall = (nums) => {
     data = swap(data, start, minIdx);
     start++;
   }
-
+  snapshots = record(data, data, snapshots);
   return { data, snapshots };
 };
 
@@ -44,12 +44,12 @@ const _selectionSortLarge = (nums) => {
     for (let i = start; i <= end; i++) {
       if (data[i].y < data[minIdx].y) {
         minIdx = i;
-        snapshots = record(data, [data[start]._id, data[i]._id], snapshots);
+        snapshots = record(data, [data[start]._id, data[i]], snapshots);
       }
     }
     data = swap(data, start, minIdx);
     start++;
   }
-
+  snapshots = record(data, data, snapshots);
   return { data, snapshots };
 };

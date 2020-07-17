@@ -1,6 +1,6 @@
 export const record = (data, nodes, snapshots) => {
   const snapshot = [...data];
-  const focusNodes = [...nodes];
+  const focusNodes = _getFocusNodes(nodes);
   const name = `Pass #${snapshots.length}`;
   const record = [
     {
@@ -24,8 +24,13 @@ export const mapChartData = (snapshots) => {
         size: data.y,
         color: iter.focusNodes.includes(data._id) ? 255 : 150,
         opacity: iter.focusNodes.includes(data._id) ? 1 : 0.5,
+        stroke: { color: "black", width: 5 },
       };
     });
     return { name, snapshot };
   });
+};
+
+const _getFocusNodes = (data) => {
+  return data.map((item) => item._id);
 };

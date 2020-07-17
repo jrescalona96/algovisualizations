@@ -1,12 +1,13 @@
 #commit, merge, push changes from dev
-printf "\n\n====================== stage changes =============================\n"
+printf "\n====================== stage changes =============================\n\n"
 git add .
-printf "\n\n====================== commit changes ============================\n"
-git commit -m "$1" && printf "commit with $1"
-printf "\n\n=================== merged master to dev =========================\n"
+printf "\n====================== commit changes ============================\n\n"
+printf "commit with $1"
+git commit -m "$1"
+printf "\n=================== merged master to dev =========================\n\n"
 git checkout master && git merge dev
-printf "\n\n====================== merged changes ============================\n"
+printf "\n====================== merged changes ============================\n\n"
 git push
-printf "\n\n====================== pushed changes ============================\n"
+printf "\n====================== pushed changes ============================\n\n"
 git checkout dev
-printf "\n\nAll Done!!\n\n"
+printf "\nAll Done!!\n\n"
