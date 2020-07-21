@@ -16,7 +16,7 @@
     "react-scripts": "3.4.1",
     "react-vis": "^1.11.7"
   },
-  "homepage": "https://github.com/jrescalona96/algovisualizations.git",
+  "homepage": "https://github.com/jrescalona96/algovisualizations",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
