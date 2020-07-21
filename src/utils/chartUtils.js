@@ -31,5 +31,7 @@ export const mapChartData = (snapshots) => {
 };
 
 const _getFocusNodes = (data) => {
-  return data.map((item) => item._id);
+  return data.map((item) => {
+    if (item) return item._id;
+  });
 };

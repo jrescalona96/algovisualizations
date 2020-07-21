@@ -20,12 +20,7 @@ const _selectionSortSmall = (nums) => {
     for (let i = start; i <= end; i++) {
       if (data[i].y < data[minIdx].y) minIdx = i;
 
-      snapshots = record(
-        data,
-        [data[minIdx], data[i], data[start]],
-
-        snapshots
-      );
+      snapshots = record(data, [data[minIdx], data[i], data[start]], snapshots);
     }
     data = swap(data, start, minIdx);
     start++;

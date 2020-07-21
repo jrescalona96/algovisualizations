@@ -8,7 +8,7 @@ function SortOptions({
   onChangeDataCount,
   onSetDataCount,
 }) {
-  const maxSpeed = 1000;
+  const maxSpeed = 3000;
   const maxDataCount = 300;
   return (
     <React.Fragment>

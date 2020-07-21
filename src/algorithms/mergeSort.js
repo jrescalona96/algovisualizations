@@ -1,4 +1,5 @@
 import { record } from "../utils/chartUtils";
+import { swap } from "../utils/sortUtils";
 
 let snapshots = [];
 let data = [];
@@ -19,7 +20,7 @@ const _mergeSort = (start, end) => {
     _mergeSort(mid + 1, end);
     _merge(start, mid, mid + 1, end);
   } else if (size === 2) {
-    if (data[start].y > data[end].y) _swap(start, end);
+    if (data[start].y > data[end].y) swap(data, start, end);
   }
   snapshots = record(data, [data[mid]], snapshots);
   return;
@@ -66,11 +67,4 @@ const _merge = (leftStart, leftEnd, rightStart, rightEnd) => {
   }
 
   return;
-};
-
-const _swap = (idx1, idx2) => {
-  let temp = data[idx1];
-  data[idx1] = data[idx2];
-  data[idx2] = temp;
-  return data;
 };

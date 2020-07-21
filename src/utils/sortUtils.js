@@ -1,9 +1,8 @@
 export const swap = (nums, idx1, idx2) => {
-  let data = [...nums];
-  let temp = data[idx1];
-  data[idx1] = data[idx2];
-  data[idx2] = temp;
-  return data;
+  let temp = nums[idx1];
+  nums[idx1] = nums[idx2];
+  nums[idx2] = temp;
+  return nums;
 };
 
 export default { swap };
