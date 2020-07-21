@@ -4,7 +4,7 @@ import { bubbleSort } from "../../algorithms/bubbleSort";
 import { selectionSort } from "../../algorithms/selectionSort";
 import { mergeSort } from "../../algorithms/mergeSort";
 import { insertionSort } from "../../algorithms/insertionSort";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import Chart from "../common/chart";
 import SortMenu from "../sortingPage/sortMenu";
 import SortOptions from "./sortOptions";
@@ -39,15 +39,11 @@ function SortingPage() {
   const [dataCount, setDataCount] = useState(10);
   const [data, setData] = useState(generateData(dataCount));
   const [speed, setSpeed] = useState(200);
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[4]);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[0]);
   const [timer, setTimer] = useState(0);
-  const [comparisons, setComparisons] = useState(0);
 
   const visualize = (snapshots, index) => {
-    setComparisons(index);
-    const { snapshot } = snapshots[index];
-    setData(snapshot);
-
+    setData(snapshots[index]);
     setTimer(
       setTimeout(() => {
         if (index < snapshots.length - 1) {
@@ -68,7 +64,6 @@ function SortingPage() {
   const handleChangeDataCount = (_, value) => {
     stopTimer();
     setDataCount(value);
-    reset();
   };
 
   const handleSetDataCount = () => {
@@ -95,7 +90,6 @@ function SortingPage() {
 
   return (
     <React.Fragment>
-      <Typography variant="h3">{comparisons}</Typography>
       <Chart data={data} />
       <Grid container justify="space-between">
         <Grid item xs={12} sm={6}>
