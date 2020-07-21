@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/jrescalona96/algovisualizations.git/static/css/main.09244cc0.chunk.css",
-    "main.js": "/jrescalona96/algovisualizations.git/static/js/main.0fc1a9dd.chunk.js",
-    "main.js.map": "/jrescalona96/algovisualizations.git/static/js/main.0fc1a9dd.chunk.js.map",
-    "runtime-main.js": "/jrescalona96/algovisualizations.git/static/js/runtime-main.b62fb40b.js",
-    "runtime-main.js.map": "/jrescalona96/algovisualizations.git/static/js/runtime-main.b62fb40b.js.map",
-    "static/js/2.87cf7159.chunk.js": "/jrescalona96/algovisualizations.git/static/js/2.87cf7159.chunk.js",
-    "static/js/2.87cf7159.chunk.js.map": "/jrescalona96/algovisualizations.git/static/js/2.87cf7159.chunk.js.map",
-    "index.html": "/jrescalona96/algovisualizations.git/index.html",
-    "precache-manifest.072080a74fcaee446eaa7a5cf21d071c.js": "/jrescalona96/algovisualizations.git/precache-manifest.072080a74fcaee446eaa7a5cf21d071c.js",
-    "service-worker.js": "/jrescalona96/algovisualizations.git/service-worker.js",
-    "static/css/main.09244cc0.chunk.css.map": "/jrescalona96/algovisualizations.git/static/css/main.09244cc0.chunk.css.map",
-    "static/js/2.87cf7159.chunk.js.LICENSE.txt": "/jrescalona96/algovisualizations.git/static/js/2.87cf7159.chunk.js.LICENSE.txt"
+    "main.css": "/jrescalona96/algovisualizations/static/css/main.09244cc0.chunk.css",
+    "main.js": "/jrescalona96/algovisualizations/static/js/main.0fc1a9dd.chunk.js",
+    "main.js.map": "/jrescalona96/algovisualizations/static/js/main.0fc1a9dd.chunk.js.map",
+    "runtime-main.js": "/jrescalona96/algovisualizations/static/js/runtime-main.ae34aa3d.js",
+    "runtime-main.js.map": "/jrescalona96/algovisualizations/static/js/runtime-main.ae34aa3d.js.map",
+    "static/js/2.87cf7159.chunk.js": "/jrescalona96/algovisualizations/static/js/2.87cf7159.chunk.js",
+    "static/js/2.87cf7159.chunk.js.map": "/jrescalona96/algovisualizations/static/js/2.87cf7159.chunk.js.map",
+    "index.html": "/jrescalona96/algovisualizations/index.html",
+    "precache-manifest.4af84dfed484cf8da29ed211b5ffd4d2.js": "/jrescalona96/algovisualizations/precache-manifest.4af84dfed484cf8da29ed211b5ffd4d2.js",
+    "service-worker.js": "/jrescalona96/algovisualizations/service-worker.js",
+    "static/css/main.09244cc0.chunk.css.map": "/jrescalona96/algovisualizations/static/css/main.09244cc0.chunk.css.map",
+    "static/js/2.87cf7159.chunk.js.LICENSE.txt": "/jrescalona96/algovisualizations/static/js/2.87cf7159.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.b62fb40b.js",
+    "static/js/runtime-main.ae34aa3d.js",
     "static/js/2.87cf7159.chunk.js",
     "static/css/main.09244cc0.chunk.css",
     "static/js/main.0fc1a9dd.chunk.js"
