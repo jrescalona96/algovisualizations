@@ -23,7 +23,7 @@ https://jrescalona96.github.io/algovisualizations/
 
 ### Click "Algorithm" button to change executing algorithm. "Start" to start simulation.
 
-![Change Algorithm/ Start Button](https://github.com/jrescalona96/algovisualizations/tree/master/public/demopic3.png)
+![Change Algorithm/ Start Button](https://github.com/jrescalona96/algovisualizations/blob/master/public/demopic3.png)
 
 > Note: Every simulation will have a different data set.
 
