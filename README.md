@@ -27,4 +27,4 @@ https://jrescalona96.github.io/algovisualizations/
 
 > Note: Every simulation will have a different data set.
 
-### Check out my other works at johnescalona.com
+### Check out my other works at [johnescalona.com](https://johnescalona.com/)
