@@ -15,15 +15,15 @@ https://jrescalona96.github.io/algovisualizations/
 
 ### Drag slider to change speed of simulation, then hit reset.
 
-[Speed Slider](https://github.com/jrescalona96/algovisualizations/blob/master/public/demopic1.png)
+![Speed Slider](https://github.com/jrescalona96/algovisualizations/blob/master/public/demopic1.png)
 
 ### Drag slider to increase or decrease the number of working data then hit reset. To see the values of each data item, decrease working data set to at most 30.
 
-[Data Set Slider](https://github.com/jrescalona96/algovisualizations/blob/master/public/demopic2.png)
+![Data Set Slider](https://github.com/jrescalona96/algovisualizations/blob/master/public/demopic2.png)
 
 ### Click "Algorithm" button to change executing algorithm. "Start" to start simulation.
 
-[Change Algorithm/ Start Button](https://github.com/jrescalona96/algovisualizations/tree/master/public/demopic3.png)
+![Change Algorithm/ Start Button](https://github.com/jrescalona96/algovisualizations/tree/master/public/demopic3.png)
 
 > Note: Every simulation will have a different data set.
 
