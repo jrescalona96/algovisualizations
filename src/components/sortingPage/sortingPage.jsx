@@ -39,11 +39,12 @@ function SortingPage() {
   const [dataCount, setDataCount] = useState(10);
   const [data, setData] = useState(generateData(dataCount));
   const [speed, setSpeed] = useState(200);
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[0]);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[4]);
   const [timer, setTimer] = useState(0);
 
   const visualize = (snapshots, index) => {
-    setData(snapshots[index]);
+    setData(snapshots[index].snapshot);
+
     setTimer(
       setTimeout(() => {
         if (index < snapshots.length - 1) {
@@ -57,8 +58,11 @@ function SortingPage() {
 
   const handleStart = () => {
     stopTimer();
-    const iter = runAlgorithm(selectedAlgorithm.algorithm, data);
-    visualize(iter, 0);
+    runAlgorithm(selectedAlgorithm.algorithm, data)
+      .then((values) => visualize(values, 0))
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const handleChangeDataCount = (_, value) => {
@@ -84,6 +88,7 @@ function SortingPage() {
   };
 
   const reset = () => {
+    setData([]);
     const data = generateData(dataCount);
     setData(data);
   };

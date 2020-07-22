@@ -19,16 +19,21 @@ function ValueLabelComponent(props) {
 function CustomSlider({
   title,
   value,
+  unit,
   onChange,
   maxValue,
   onSubmit,
   buttonLabel,
+  label,
 }) {
   return (
     <Grid>
       {title && <Typography variant="button">{title}</Typography>}
       <Grid container justify="space-between">
-        <Typography variant="h5">{value}</Typography>
+        <Typography variant="h5">
+          {label}
+          {unit}
+        </Typography>
         {onSubmit && (
           <Button variant="contained" color="primary" onClick={onSubmit}>
             {buttonLabel}

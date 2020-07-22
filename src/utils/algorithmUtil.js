@@ -1,6 +1,6 @@
 import { mapChartData } from "../utils/chartUtils";
 
-export const runAlgorithm = (algorithm, nums) => {
+export const runAlgorithm = async (algorithm, nums) => {
   const { snapshots } = algorithm(nums);
   return mapChartData(snapshots);
 };

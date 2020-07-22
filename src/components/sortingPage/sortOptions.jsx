@@ -8,18 +8,21 @@ function SortOptions({
   onChangeDataCount,
   onSetDataCount,
 }) {
-  const maxSpeed = 3000;
   const maxDataCount = 300;
+  const formattedSpeed = (speed / 1000).toFixed(1);
+  const maxSpeed = 3000;
   return (
     <React.Fragment>
       <CustomSlider
         title="Visualization Speed"
+        label={formattedSpeed}
         maxValue={maxSpeed}
         onChange={onChangeSpeed}
         value={speed}
+        unit="s"
       />
       <CustomSlider
-        title="Data Set Count"
+        title="Data Count"
         maxValue={maxDataCount}
         onChange={onChangeDataCount}
         onSubmit={onSetDataCount}
