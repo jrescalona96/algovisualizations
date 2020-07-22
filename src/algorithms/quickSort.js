@@ -11,7 +11,6 @@ export const quickSort = (nums) => {
 };
 
 const _quickSort = (data, start, end) => {
-  snapshots = record(data, [], snapshots);
   if (start >= end) {
     return;
   } else {
