@@ -1,26 +1,36 @@
 import { swap } from "../utils/sortUtils";
 import { record } from "../utils/chartUtils";
+import _ from "lodash";
+
+let snapshots;
 
 export const bubbleSort = (nums) => {
   let data = [...nums];
-  let snapshots = [];
-  let current = 0;
+  snapshots = [];
+  _bubbleSort(data);
+  snapshots = record(data, [], _.range(data.length), snapshots);
+  return { data, snapshots };
+};
+
+const _bubbleSort = (data) => {
+  let curr = 0;
   let end = data.length - 1;
   let sorted = false;
 
   while (!sorted) {
     sorted = true;
-    while (current < end) {
-      snapshots = record(data, [data[current], data[current + 1]], snapshots);
-      if (data[current].y > data[current + 1].y) {
-        data = swap(data, current, current + 1);
+    while (curr < end) {
+      if (data[curr].y > data[curr + 1].y) {
         sorted = false;
+        snapshots = record(data, [curr + 1], [curr], snapshots);
+        data = swap(data, curr, curr + 1);
+        snapshots = record(data, [curr], [curr + 1], snapshots);
+      } else {
+        snapshots = record(data, [], [curr, curr + 1], snapshots);
       }
-      current++;
+      curr++;
     }
-    current = 0;
+    curr = 0;
     end--;
   }
-  snapshots = record(data, data, snapshots);
-  return { data, snapshots };
 };

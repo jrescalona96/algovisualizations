@@ -6,7 +6,10 @@ export function generateData(totalCount) {
     const _id = "_" + Math.random().toString(36).substr(2, 9);
     const y = Math.floor(Math.random() * Math.floor(totalCount)) + 1;
     const x = count++;
-    data.push({ _id, x, y });
+    const size = y;
+    const color = 0.1;
+    const opacity = 0.8;
+    data.push({ _id, x, y, size, color, opacity });
   }
 
   return data;
