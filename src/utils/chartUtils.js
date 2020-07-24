@@ -1,17 +1,14 @@
 export const record = (data, pNodes, sNodes, snapshots) => {
-  const d = [...data];
-  const primaryNodes = _getFocusNodeIds(pNodes, data);
-  const secondaryNodes = _getFocusNodeIds(sNodes, data);
-  const name = `Pass #${snapshots.length}`;
-  const record = [
-    {
-      name,
-      data: d,
-      primaryNodes,
-      secondaryNodes,
-    },
-  ];
-  return [...snapshots, ...record];
+  let update = [...snapshots];
+
+  update.push({
+    name: `Pass #${update.length}`,
+    data: [...data],
+    primaryNodes: _getFocusNodeIds(pNodes, data),
+    secondaryNodes: _getFocusNodeIds(sNodes, data),
+  });
+
+  return update;
 };
 
 const _getFocusNodeIds = (nodes, data) => {

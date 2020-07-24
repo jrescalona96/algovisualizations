@@ -39,7 +39,7 @@ function SortingPage() {
   const [dataCount, setDataCount] = useState(20);
   const [data, setData] = useState(generateData(dataCount));
   const [speed, setSpeed] = useState(100);
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[2]);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[4]);
   const [timer, setTimer] = useState(0);
 
   const stopTimer = () => clearTimeout(timer);
