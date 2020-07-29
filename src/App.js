@@ -1,32 +1,16 @@
 import React, { useState } from "react";
+import { Switch, Route } from "react-router-dom";
 import { generateData } from "./services/testData/data";
-import { sort } from "./algorithms/index";
-import SortingPage from "./components/sortingPage/sortingPage";
-import AppBar from "./components/customAppBar";
 import { runAlgorithm } from "./utils/algorithmUtil";
-import Options from "./components/options";
-import { Container, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { sort } from "./algorithms/index";
+import SortingPage from "./components/sortingPage";
+import NavBar from "./components/navBar";
+import SearchingPage from "./components/searchingPage";
 import "./App.scss";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    marginBottom: theme.spacing(0),
-  },
-  options: {
-    position: "fixed",
-    bottom: theme.spacing(2),
-  },
-  header: {
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-}));
-
 function App() {
-  const title = "algovisualizations";
-  const classes = useStyles();
+  const appName = "algovisualizations";
+
   const [speed, setSpeed] = useState(100);
   const [timer, setTimer] = useState(0);
   const [dataCount, setDataCount] = useState(20);
@@ -37,6 +21,13 @@ function App() {
   const resetTimer = () => {
     clearTimeout(timer);
     setTimer(0);
+  };
+
+  const resetData = () => {
+    let newData = generateData(dataCount);
+    resetTimer();
+    setWorkingData(newData);
+    setData(workingData);
   };
 
   const runVisualization = (snapshots, index) => {
@@ -61,7 +52,7 @@ function App() {
     }
   };
 
-  const handleChangeSpeed = (_, value) => {
+  const handleChangeSpeed = (value) => {
     resetTimer();
     setSpeed(value);
   };
@@ -73,43 +64,44 @@ function App() {
     setData(workingData);
   };
 
-  const handleChangeDataCount = (_, value) => {
+  const handleChangeDataCount = (value) => {
     setDataCount(value);
     resetData();
   };
 
-  const resetData = () => {
-    let newData = generateData(dataCount);
-    resetTimer();
-    setWorkingData(newData);
-    setData(workingData);
+  const mutators = {
+    data: data,
+    dataCount: dataCount,
+    selectedAlgorithm: selectedAlgorithm,
+    algorithms: sort,
+    timer: timer,
+    speed: speed,
+    onStart: handleStart,
+    onSetSelectedAlgorithm: (val) => handleSetSelectedAlgorithm(val),
+    onChangeDataCount: (val) => handleChangeDataCount(val),
+    onChangeSpeed: (val) => handleChangeSpeed(val),
   };
 
   return (
-    <main>
-      <AppBar title={title} />
-
-      <Typography className={classes.header} variant="h2">
-        {selectedAlgorithm.name}
-      </Typography>
-
-      <SortingPage
-        data={data}
-        selectedAlgorithm={selectedAlgorithm}
-        algorithms={sort}
-        onStart={handleStart}
-        onSetSelectedAlgorithm={handleSetSelectedAlgorithm}
-        timer={timer}
-      />
-      <Container item className={classes.options}>
-        <Options
-          onChangeSpeed={handleChangeSpeed}
-          speed={speed}
-          dataCount={dataCount}
-          onChangeDataCount={handleChangeDataCount}
-        />
-      </Container>
-    </main>
+    <React.Fragment>
+      <NavBar title={appName} />
+      <main>
+        <Switch>
+          <Route
+            path="/sorting"
+            render={(props) => <SortingPage {...mutators} {...props} />}
+          />
+          <Route
+            path="/searching"
+            render={(props) => <SearchingPage {...mutators} {...props} />}
+          />
+          <Route
+            path="/"
+            render={(props) => <SortingPage {...mutators} {...props} />}
+          />
+        </Switch>
+      </main>
+    </React.Fragment>
   );
 }
 

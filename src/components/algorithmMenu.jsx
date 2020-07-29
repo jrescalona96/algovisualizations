@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SortMenu({
+function AlgorithmMenu({
   selectedAlgorithm,
   algorithms,
   onSetSelectedAlgorithm,
@@ -23,7 +23,6 @@ function SortMenu({
 }) {
   const classes = useStyles();
   const isTimerSet = timer > 0;
-
   return (
     <div className={classes.root}>
       <Grid container justify="space-evenly">
@@ -59,4 +58,4 @@ function SortMenu({
   );
 }
 
-export default SortMenu;
+export default AlgorithmMenu;
