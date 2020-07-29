@@ -1,5 +1,5 @@
-import { swap } from "../utils/sortUtils";
-import { record } from "../utils/chartUtils";
+import { swap } from "../../utils/sortUtils";
+import { record } from "../../utils/chartUtils";
 import _ from "lodash";
 
 let snapshots = [];

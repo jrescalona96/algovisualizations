@@ -3,27 +3,33 @@ import { XYPlot, VerticalBarSeries, LabelSeries } from "react-vis";
 import { Grid } from "@material-ui/core";
 
 function Chart({ data }) {
+  const hasMinimalData = data.length <= 40;
+  const options = {
+    colorType: "category",
+    colorDomain: [0, 1, 2, 4, 5, 6, 7],
+    colorRange: [
+      "#3f51b5",
+      "orange",
+      "red",
+      "indigo",
+      "green",
+      "yellow",
+      "teal",
+      "darkblue",
+    ],
+    height: 500,
+    width: window.innerWidth * 0.95,
+  };
+
+  const showDataLabels = () => (
+    <LabelSeries labelAnchorX="middle" data={data} getLabel={(d) => d.y} />
+  );
+
   return (
     <Grid container justify="center">
-      <XYPlot
-        height={500}
-        width={window.innerWidth * 0.85}
-        colorType="category"
-        colorDomain={[0, 1, 2]}
-        colorRange={["orange", "#4051B5", "red"]}
-      >
+      <XYPlot {...options}>
         <VerticalBarSeries data={data} />
-        {data.length <= 30 ? (
-          <LabelSeries
-            style={{
-              fontSize: "1.2rem",
-              fontWeight: "bold",
-            }}
-            labelAnchorX="middle"
-            data={data}
-            getLabel={(d) => d.y}
-          />
-        ) : null}
+        {hasMinimalData && showDataLabels()}
       </XYPlot>
     </Grid>
   );

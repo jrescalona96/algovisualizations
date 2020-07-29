@@ -35,7 +35,7 @@ export const mapChartData = (snapshots) => {
 
 const _getOpacity = (_id, iter) => {
   const nodes = [...iter.primaryNodes, ...iter.secondaryNodes];
-  return nodes.includes(_id) ? 1 : 0.7;
+  return nodes.includes(_id) ? 1 : 0.5;
 };
 
 const _getColor = (_id, iter) => {
@@ -43,6 +43,6 @@ const _getColor = (_id, iter) => {
   //red
   if (primaryNodes.includes(_id)) return 2;
   //blue
-  else if (secondaryNodes.includes(_id)) return 1.25;
-  else return 0.5; // orange
+  else if (secondaryNodes.includes(_id)) return 1;
+  else return 0; // orange
 };

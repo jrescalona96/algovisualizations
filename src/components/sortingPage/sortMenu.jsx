@@ -1,35 +1,61 @@
 import React from "react";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
-import { Typography, Button, Box, Grid } from "@material-ui/core";
-import CustomMenu from "../common/customMenu";
+import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
+import { Button, Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    marginBottom: theme.spacing(0),
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
 
 function SortMenu({
   selectedAlgorithm,
   algorithms,
   onSetSelectedAlgorithm,
   onStart,
+  timer,
 }) {
+  const classes = useStyles();
+  const isTimerSet = timer > 0;
+
   return (
-    <React.Fragment>
-      <Typography variant="h3">{selectedAlgorithm.name}</Typography>
-      <Grid container justify="flex-end">
-        <CustomMenu
-          options={algorithms}
-          onSelect={(_id) => onSetSelectedAlgorithm(_id)}
-          name="Algorithm"
-        />
-        <Box ml={1}>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={onStart}
-            startIcon={<PlayCircleOutlineIcon />}
-          >
-            Start
-          </Button>
-        </Box>
+    <div className={classes.root}>
+      <Grid container justify="space-evenly">
+        {algorithms.map((item) => {
+          const { _id, name } = item;
+          const variant =
+            _id === selectedAlgorithm._id ? "contained" : "outlined";
+          return (
+            <Grid key={_id} item>
+              <Button
+                className={classes.options}
+                variant={variant}
+                color="primary"
+                onClick={() => onSetSelectedAlgorithm(_id)}
+              >
+                {name}
+              </Button>
+            </Grid>
+          );
+        })}
+        <Button
+          className={classes.options}
+          variant="contained"
+          color={isTimerSet ? "default" : "secondary"}
+          onClick={onStart}
+          size="small"
+          startIcon={isTimerSet ? <SwapHorizIcon /> : <PlayCircleOutlineIcon />}
+        >
+          {isTimerSet ? "Reset" : "Start"}
+        </Button>
       </Grid>
-    </React.Fragment>
+    </div>
   );
 }
 
