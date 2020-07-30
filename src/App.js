@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { generateData } from "./services/testData/data";
 import { runAlgorithm } from "./utils/algorithmUtil";
 import { sort } from "./algorithms/index";
@@ -12,8 +12,8 @@ import SearchingPage from "./components/searchingPage/searchingPage";
 import "./App.scss";
 
 function App() {
+  const root = "/algovisualizations";
   const appName = "algovisualizations";
-
   const [speed, setSpeed] = useState(100);
   const [timer, setTimer] = useState(0);
   const [dataCount, setDataCount] = useState(20);
@@ -77,13 +77,13 @@ function App() {
       <NavBar title={appName} />
       <main>
         <Switch>
-          <Route exact path="/" component={() => <HomePage />} />
+          <Route exact path={root} component={() => <HomePage />} />
           <Route
-            path="/searching"
+            path={`${root}/searching`}
             render={(props) => <SearchingPage {...props} />}
           />
           <Route
-            path="/sorting"
+            path={`${root}/sorting`}
             render={(props) => (
               <SortingPage
                 data={data}
@@ -99,6 +99,7 @@ function App() {
               />
             )}
           />
+          <Redirect from={`${root}/*`} to={root} />
         </Switch>
       </main>
     </React.Fragment>
