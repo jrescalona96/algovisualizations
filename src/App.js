@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+
 import { generateData } from "./services/testData/data";
-import { runAlgorithm } from "./utils/algorithmUtil";
 import { sort } from "./algorithms/index";
+import { runAlgorithm } from "./utils/algorithmUtil";
 
 import NavBar from "./components/navBar";
 import HomePage from "./components/homePage/homePage";
@@ -12,8 +13,8 @@ import SearchingPage from "./components/searchingPage/searchingPage";
 import "./App.scss";
 
 function App() {
-  const root = "/algovisualizations";
-  const appName = "algovisualizations";
+  const baseRoute = "/algovisualizations";
+  const title = "algovisualizations";
   const [speed, setSpeed] = useState(100);
   const [timer, setTimer] = useState(0);
   const [dataCount, setDataCount] = useState(20);
@@ -24,13 +25,6 @@ function App() {
   const resetTimer = () => {
     clearTimeout(timer);
     setTimer(0);
-  };
-
-  const resetData = () => {
-    let newData = generateData(dataCount);
-    resetTimer();
-    setWorkingData(newData);
-    setData(workingData);
   };
 
   const runVisualization = (snapshots, index) => {
@@ -55,7 +49,7 @@ function App() {
     }
   };
 
-  const handleChangeSpeed = (value) => {
+  const handleChangeSpeed = (_, value) => {
     resetTimer();
     setSpeed(value);
   };
@@ -67,23 +61,30 @@ function App() {
     setData(workingData);
   };
 
-  const handleChangeDataCount = (value) => {
+  const handleChangeDataCount = (_, value) => {
     setDataCount(value);
     resetData();
   };
 
+  const resetData = () => {
+    let newData = generateData(dataCount);
+    resetTimer();
+    setWorkingData(newData);
+    setData(workingData);
+  };
+
   return (
     <React.Fragment>
-      <NavBar title={appName} />
+      <NavBar title={title} />
       <main>
         <Switch>
-          <Route exact path={root} component={() => <HomePage />} />
+          <Route exact path={baseRoute} component={() => <HomePage />} />
           <Route
-            path={`${root}/searching`}
+            path={`${baseRoute}/searching`}
             render={(props) => <SearchingPage {...props} />}
           />
           <Route
-            path={`${root}/sorting`}
+            path={`${baseRoute}/sorting`}
             render={(props) => (
               <SortingPage
                 data={data}
@@ -96,10 +97,11 @@ function App() {
                 speed={speed}
                 dataCount={dataCount}
                 onChangeDataCount={handleChangeDataCount}
+                {...props}
               />
             )}
           />
-          <Redirect from={`${root}/*`} to={root} />
+          <Redirect from={`${baseRoute}/*`} to={baseRoute} />
         </Switch>
       </main>
     </React.Fragment>

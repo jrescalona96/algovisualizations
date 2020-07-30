@@ -2,12 +2,8 @@ import React from "react";
 import Load from "../common/load/load";
 
 function SearchingPage() {
-  const loadingMessage = "Still working on this one";
-  return (
-    <React.Fragment>
-      <Load active={true} message={loadingMessage} />
-    </React.Fragment>
-  );
+  const message = "Still working on this";
+  return <Load active={true} message={message} />;
 }
 
 export default SearchingPage;
