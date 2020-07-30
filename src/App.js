@@ -3,9 +3,9 @@ import { Switch, Route } from "react-router-dom";
 import { generateData } from "./services/testData/data";
 import { runAlgorithm } from "./utils/algorithmUtil";
 import { sort } from "./algorithms/index";
-import SortingPage from "./components/sortingPage";
+import SortingPage from "./components/sortingPage/sortingPage";
 import NavBar from "./components/navBar";
-import SearchingPage from "./components/searchingPage";
+import SearchingPage from "./components/searchingPage/searchingPage";
 import "./App.scss";
 
 function App() {
