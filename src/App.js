@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { Switch, Route } from "react-router-dom";
+import { Container } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import { generateData } from "./services/testData/data";
 import { sort } from "./algorithms/index";
-import SortingPage from "./components/sortingPage/sortingPage";
-import AppBar from "./components/customAppBar";
 import { runAlgorithm } from "./utils/algorithmUtil";
+
+import NavBar from "./components/navBar";
 import Options from "./components/options";
-import { Container, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import HomePage from "./components/homePage/homePage";
+import SortingPage from "./components/sortingPage/sortingPage";
+import SearchingPage from "./components/searchingPage/searchingPage";
+
 import "./App.scss";
 
 const useStyles = makeStyles((theme) => ({
@@ -86,30 +91,35 @@ function App() {
   };
 
   return (
-    <main>
-      <AppBar title={title} />
-
-      <Typography className={classes.header} variant="h2">
-        {selectedAlgorithm.name}
-      </Typography>
-
-      <SortingPage
-        data={data}
-        selectedAlgorithm={selectedAlgorithm}
-        algorithms={sort}
-        onStart={handleStart}
-        onSetSelectedAlgorithm={handleSetSelectedAlgorithm}
-        timer={timer}
-      />
-      <Container item className={classes.options}>
-        <Options
-          onChangeSpeed={handleChangeSpeed}
-          speed={speed}
-          dataCount={dataCount}
-          onChangeDataCount={handleChangeDataCount}
-        />
-      </Container>
-    </main>
+    <React.Fragment>
+      <NavBar title={title} />
+      <main>
+        <Switch>
+          <Route exact path="/" component={() => <HomePage />} />
+          <Route
+            path="/searching"
+            render={(props) => <SearchingPage {...props} />}
+          />
+          <Route
+            path="/sorting"
+            render={(props) => (
+              <SortingPage
+                data={data}
+                selectedAlgorithm={selectedAlgorithm}
+                algorithms={sort}
+                onStart={handleStart}
+                onSetSelectedAlgorithm={handleSetSelectedAlgorithm}
+                timer={timer}
+                onChangeSpeed={handleChangeSpeed}
+                speed={speed}
+                dataCount={dataCount}
+                onChangeDataCount={handleChangeDataCount}
+              />
+            )}
+          />
+        </Switch>
+      </main>
+    </React.Fragment>
   );
 }
 
