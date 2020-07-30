@@ -28,7 +28,11 @@ function CustomSlider({
 }) {
   return (
     <Grid>
-      {title && <Typography variant="button">{title}</Typography>}
+      {title && (
+        <Typography variant="button" style={{ color: "#3f51b5" }}>
+          {title}
+        </Typography>
+      )}
       <Grid container justify="space-between">
         <Typography variant="h5">
           {label}

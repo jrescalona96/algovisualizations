@@ -1,6 +1,6 @@
 import React from "react";
-import CustomSlider from "./common/customSlider";
 import { Grid } from "@material-ui/core";
+import CustomSlider from "./common/customSlider";
 
 function Options({ onChangeSpeed, speed, dataCount, onChangeDataCount }) {
   const maxDataCount = 1000;
