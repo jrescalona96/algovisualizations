@@ -16,20 +16,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function NavBar({ title }) {
+  const baseRoute = "/algovisualizations";
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
         <Toolbar variant="dense">
-          <NavLink to="/" className={classes.title}>
+          <NavLink to={baseRoute} className={classes.title}>
             <Typography variant="h6" color="inherit">
               {title}
             </Typography>
           </NavLink>
-          <NavLink to="/sorting" className={classes.button}>
+          <NavLink to={`${baseRoute}/sorting`} className={classes.button}>
             <Button color="inherit">Sorting</Button>
           </NavLink>
-          <NavLink to="/searching" className={classes.button}>
+          <NavLink to={`${baseRoute}/searching`} className={classes.button}>
             <Button color="inherit">Searching</Button>
           </NavLink>
         </Toolbar>

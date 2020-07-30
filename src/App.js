@@ -1,37 +1,20 @@
 import React, { useState } from "react";
-import { Switch, Route } from "react-router-dom";
-import { Container } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Switch, Route, Redirect } from "react-router-dom";
+
 import { generateData } from "./services/testData/data";
 import { sort } from "./algorithms/index";
 import { runAlgorithm } from "./utils/algorithmUtil";
 
 import NavBar from "./components/navBar";
-import Options from "./components/options";
 import HomePage from "./components/homePage/homePage";
 import SortingPage from "./components/sortingPage/sortingPage";
 import SearchingPage from "./components/searchingPage/searchingPage";
 
 import "./App.scss";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    marginBottom: theme.spacing(0),
-  },
-  options: {
-    position: "fixed",
-    bottom: theme.spacing(2),
-  },
-  header: {
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-}));
-
 function App() {
+  const baseRoute = "/algovisualizations";
   const title = "algovisualizations";
-  const classes = useStyles();
   const [speed, setSpeed] = useState(100);
   const [timer, setTimer] = useState(0);
   const [dataCount, setDataCount] = useState(20);
@@ -95,13 +78,13 @@ function App() {
       <NavBar title={title} />
       <main>
         <Switch>
-          <Route exact path="/" component={() => <HomePage />} />
+          <Route exact path={baseRoute} component={() => <HomePage />} />
           <Route
-            path="/searching"
+            path={`${baseRoute}/searching`}
             render={(props) => <SearchingPage {...props} />}
           />
           <Route
-            path="/sorting"
+            path={`${baseRoute}/sorting`}
             render={(props) => (
               <SortingPage
                 data={data}
@@ -114,9 +97,11 @@ function App() {
                 speed={speed}
                 dataCount={dataCount}
                 onChangeDataCount={handleChangeDataCount}
+                {...props}
               />
             )}
           />
+          <Redirect from={`${baseRoute}/*`} to={baseRoute} />
         </Switch>
       </main>
     </React.Fragment>
