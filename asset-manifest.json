@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/algovisualizations/static/css/main.ce50bdc8.chunk.css",
+    "main.css": "/algovisualizations/static/css/main.e8e77af6.chunk.css",
     "main.js": "/algovisualizations/static/js/main.f551d38b.chunk.js",
     "main.js.map": "/algovisualizations/static/js/main.f551d38b.chunk.js.map",
     "runtime-main.js": "/algovisualizations/static/js/runtime-main.7051c021.js",
@@ -8,15 +8,15 @@
     "static/js/2.3f85d259.chunk.js": "/algovisualizations/static/js/2.3f85d259.chunk.js",
     "static/js/2.3f85d259.chunk.js.map": "/algovisualizations/static/js/2.3f85d259.chunk.js.map",
     "index.html": "/algovisualizations/index.html",
-    "precache-manifest.52d221ff0b62c09e6e5f91e3f0df9edc.js": "/algovisualizations/precache-manifest.52d221ff0b62c09e6e5f91e3f0df9edc.js",
+    "precache-manifest.56c95231006c958913d27593c3ccf0c9.js": "/algovisualizations/precache-manifest.56c95231006c958913d27593c3ccf0c9.js",
     "service-worker.js": "/algovisualizations/service-worker.js",
-    "static/css/main.ce50bdc8.chunk.css.map": "/algovisualizations/static/css/main.ce50bdc8.chunk.css.map",
+    "static/css/main.e8e77af6.chunk.css.map": "/algovisualizations/static/css/main.e8e77af6.chunk.css.map",
     "static/js/2.3f85d259.chunk.js.LICENSE.txt": "/algovisualizations/static/js/2.3f85d259.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.7051c021.js",
     "static/js/2.3f85d259.chunk.js",
-    "static/css/main.ce50bdc8.chunk.css",
+    "static/css/main.e8e77af6.chunk.css",
     "static/js/main.f551d38b.chunk.js"
   ]
 }
