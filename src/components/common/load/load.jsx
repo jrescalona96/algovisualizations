@@ -6,7 +6,6 @@ import { Typography } from "@material-ui/core";
 function Load({ active, message }) {
   return (
     <div id="loader">
-      {message && <Typography id="loaderMessage">{message}</Typography>}
       <Loader type="ball-grid-pulse" active={active} />
       {message && (
         <Typography variant="h4" id="loaderMessage">
