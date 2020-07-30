@@ -11,6 +11,7 @@ import SortingPage from "./components/sortingPage/sortingPage";
 import SearchingPage from "./components/searchingPage/searchingPage";
 
 import "./App.scss";
+import Load from "./components/common/load/load";
 
 function App() {
   const baseRoute = "/algovisualizations";
@@ -21,6 +22,7 @@ function App() {
   const [data, setData] = useState(generateData(dataCount));
   const [workingData, setWorkingData] = useState(data);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(sort[0]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const resetTimer = () => {
     clearTimeout(timer);
@@ -41,7 +43,9 @@ function App() {
   const handleStart = () => {
     if (timer === 0) {
       runAlgorithm(selectedAlgorithm.algorithm, workingData)
-        .then((snapshots) => runVisualization(snapshots, 0))
+        .then((snapshots) => {
+          runVisualization(snapshots, 0);
+        })
         .catch((e) => console.log(e));
     } else {
       resetTimer();
@@ -76,34 +80,39 @@ function App() {
   return (
     <React.Fragment>
       <NavBar title={title} />
-      <main>
-        <Switch>
-          <Route exact path={baseRoute} component={() => <HomePage />} />
-          <Route
-            path={`${baseRoute}/searching`}
-            render={(props) => <SearchingPage {...props} />}
-          />
-          <Route
-            path={`${baseRoute}/sorting`}
-            render={(props) => (
-              <SortingPage
-                data={data}
-                selectedAlgorithm={selectedAlgorithm}
-                algorithms={sort}
-                onStart={handleStart}
-                onSetSelectedAlgorithm={handleSetSelectedAlgorithm}
-                timer={timer}
-                onChangeSpeed={handleChangeSpeed}
-                speed={speed}
-                dataCount={dataCount}
-                onChangeDataCount={handleChangeDataCount}
-                {...props}
-              />
-            )}
-          />
-          <Redirect from={`${baseRoute}/*`} to={baseRoute} />
-        </Switch>
-      </main>
+      {isLoading ? (
+        <Load active={isLoading} />
+      ) : (
+        <main>
+          <Switch>
+            <Route exact path={baseRoute} component={() => <HomePage />} />
+            <Route
+              path={`${baseRoute}/searching`}
+              render={(props) => <SearchingPage {...props} />}
+            />
+            <Route
+              path={`${baseRoute}/sorting`}
+              render={(props) => (
+                <SortingPage
+                  loading={isLoading}
+                  data={data}
+                  selectedAlgorithm={selectedAlgorithm}
+                  algorithms={sort}
+                  onStart={handleStart}
+                  onSetSelectedAlgorithm={handleSetSelectedAlgorithm}
+                  timer={timer}
+                  onChangeSpeed={handleChangeSpeed}
+                  speed={speed}
+                  dataCount={dataCount}
+                  onChangeDataCount={handleChangeDataCount}
+                  {...props}
+                />
+              )}
+            />
+            <Redirect from={`${baseRoute}/*`} to={baseRoute} />
+          </Switch>
+        </main>
+      )}
     </React.Fragment>
   );
 }

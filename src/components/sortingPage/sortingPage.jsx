@@ -24,7 +24,6 @@ function SortingPage({
   selectedAlgorithm,
   algorithms,
   timer,
-
   speed,
   dataCount,
   onChangeSpeed,
@@ -33,25 +32,28 @@ function SortingPage({
   const classes = useStyles();
   return (
     <Container id="pageContainer">
-      <Typography className="chart-header" variant="h3">
-        {selectedAlgorithm.name}
-      </Typography>
-      <Chart id="chart" data={data} />
-      <AlgorithmsMenu
-        selectedAlgorithm={selectedAlgorithm}
-        algorithms={algorithms}
-        onSetSelectedAlgorithm={onSetSelectedAlgorithm}
-        onStart={onStart}
-        timer={timer}
-      />
-      <Container className={classes.options}>
-        <Options
-          speed={speed}
-          dataCount={dataCount}
-          onChangeSpeed={onChangeSpeed}
-          onChangeDataCount={onChangeDataCount}
+      <React.Fragment>
+        <Typography className="chart-header" variant="h3">
+          {selectedAlgorithm.name}
+        </Typography>
+        <Chart id="chart" data={data} />
+        <AlgorithmsMenu
+          selectedAlgorithm={selectedAlgorithm}
+          algorithms={algorithms}
+          onSetSelectedAlgorithm={onSetSelectedAlgorithm}
+          onStart={onStart}
+          timer={timer}
         />
-      </Container>
+        <Container className={classes.options}>
+          <Options
+            speed={speed}
+            dataCount={dataCount}
+            onChangeSpeed={onChangeSpeed}
+            onChangeDataCount={onChangeDataCount}
+          />
+        </Container>
+      </React.Fragment>
+      )
     </Container>
   );
 }
