@@ -72,19 +72,6 @@ function App() {
     resetData();
   };
 
-  const mutators = {
-    data: data,
-    dataCount: dataCount,
-    selectedAlgorithm: selectedAlgorithm,
-    algorithms: sort,
-    timer: timer,
-    speed: speed,
-    onStart: handleStart,
-    onSetSelectedAlgorithm: (val) => handleSetSelectedAlgorithm(val),
-    onChangeDataCount: (val) => handleChangeDataCount(val),
-    onChangeSpeed: (val) => handleChangeSpeed(val),
-  };
-
   return (
     <React.Fragment>
       <NavBar title={appName} />

@@ -14,3 +14,15 @@ $screener: #ffffff8f;
   margin: auto;
   transform: scale(1.5);
 }
+.ball-pulse-rise > div:nth-child(1) {
+  &:nth-child(1) {
+    background-color: #ff6347af;
+  }
+}
+
+#loaderMessage {
+  width: 100%;
+  text-align: center;
+  margin-top: 20vh;
+  color: $primary-color;
+}
