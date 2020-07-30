@@ -3,9 +3,12 @@ import { Switch, Route } from "react-router-dom";
 import { generateData } from "./services/testData/data";
 import { runAlgorithm } from "./utils/algorithmUtil";
 import { sort } from "./algorithms/index";
-import SortingPage from "./components/sortingPage/sortingPage";
+
 import NavBar from "./components/navBar";
+import HomePage from "./components/homePage/homePage";
+import SortingPage from "./components/sortingPage/sortingPage";
 import SearchingPage from "./components/searchingPage/searchingPage";
+
 import "./App.scss";
 
 function App() {
@@ -87,17 +90,27 @@ function App() {
       <NavBar title={appName} />
       <main>
         <Switch>
-          <Route
-            path="/sorting"
-            render={(props) => <SortingPage {...mutators} {...props} />}
-          />
+          <Route exact path="/" component={() => <HomePage />} />
           <Route
             path="/searching"
-            render={(props) => <SearchingPage {...mutators} {...props} />}
+            render={(props) => <SearchingPage {...props} />}
           />
           <Route
-            path="/"
-            render={(props) => <SortingPage {...mutators} {...props} />}
+            path="/sorting"
+            render={(props) => (
+              <SortingPage
+                data={data}
+                selectedAlgorithm={selectedAlgorithm}
+                algorithms={sort}
+                onStart={handleStart}
+                onSetSelectedAlgorithm={handleSetSelectedAlgorithm}
+                timer={timer}
+                onChangeSpeed={handleChangeSpeed}
+                speed={speed}
+                dataCount={dataCount}
+                onChangeDataCount={handleChangeDataCount}
+              />
+            )}
           />
         </Switch>
       </main>

@@ -1,16 +1,13 @@
 import React from "react";
+import { Loader } from "react-loaders";
+import "./homePage.scss";
+
 function HomePage(props) {
   return (
-    <h1
-      style={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      Welcome Home
-    </h1>
+    <div>
+      <Loader id="loader" type="ball-pulse-rise" />
+      <h1 id="welcome">algovisualizations</h1>
+    </div>
   );
 }
 

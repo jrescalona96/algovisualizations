@@ -7,36 +7,36 @@ import { bubbleSort } from "./sort/bubbleSort";
 export const sort = [
   {
     _id: "bubble_sort",
-    name: "Bubble Sort",
+    name: "BUBBLE SORT",
     algorithm: bubbleSort,
   },
   {
     _id: "selection_sort",
-    name: "Selection Sort",
+    name: "SELECTION SORT",
     algorithm: selectionSort,
   },
   {
     _id: "insertion_sort",
-    name: "Insertion Sort",
+    name: "INSERTION SORT",
     algorithm: insertionSort,
   },
   {
     _id: "merge_sort",
-    name: "Merge Sort",
+    name: "MERGE SORT",
     algorithm: mergeSort,
   },
-  { _id: "quick_sort", name: "Quick Sort", algorithm: quickSort },
+  { _id: "quick_sort", name: "QUICK SORT", algorithm: quickSort },
 ];
 
 export const search = [
   {
     _id: "linear_search",
-    name: "Linear Search",
+    name: "LINEAR SEARCH",
     algorithm: bubbleSort,
   },
   {
     _id: "binary_search",
-    name: "Binary Search",
+    name: "BINARY SEARCH",
     algorithm: bubbleSort,
   },
 ];

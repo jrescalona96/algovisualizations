@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AlgorithmMenu({
+function AlgorithmsMenu({
   selectedAlgorithm,
   algorithms,
   onSetSelectedAlgorithm,
@@ -58,4 +58,4 @@ function AlgorithmMenu({
   );
 }
 
-export default AlgorithmMenu;
+export default AlgorithmsMenu;

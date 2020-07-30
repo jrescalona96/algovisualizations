@@ -1,0 +1,26 @@
+$primary-color: #3f51b5;
+
+@import "loaders.css/src/animations/ball-pulse-rise.scss";
+
+#welcome {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-hidden {
+  display: none;
+}
+
+.loader-active {
+  display: block;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  transform: scale(1.5);
+}

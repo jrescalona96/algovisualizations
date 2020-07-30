@@ -1,2 +1,16 @@
 $primary-color: #3f51b5;
+$screener: #ffffff8f;
 @import "loaders.css/src/animations/ball-grid-pulse.scss";
+
+#loader {
+  background-color: $screener;
+  z-index: 20;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  transform: scale(1.5);
+}
