@@ -53,7 +53,6 @@ function SortingPage({
           />
         </Container>
       </React.Fragment>
-      )
     </Container>
   );
 }
