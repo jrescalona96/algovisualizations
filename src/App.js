@@ -20,7 +20,7 @@ function App() {
   const [dataCount, setDataCount] = useState(20);
   const [data, setData] = useState(generateData(dataCount));
   const [workingData, setWorkingData] = useState(data);
-  const [record, setRecord] = useState([]);
+  const [recordSnapshots, setRecordSnapshots] = useState([]);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(sort[0]);
 
   const resetTimer = () => {
@@ -47,12 +47,14 @@ function App() {
   const handleStart = async () => {
     const notRunning = timer === 0;
     if (notRunning) {
-      const noRecordAvailable = record.length === 0;
+      const noRecordAvailable = recordSnapshots.length === 0;
+
       if (noRecordAvailable) {
         const mapped = await runAlgorithm();
-        setRecord(mapped);
+        setRecordSnapshots(mapped);
+        runVisualization(mapped, 0);
       } else {
-        runVisualization(record, 0);
+        runVisualization(recordSnapshots, 0);
       }
     } else {
       handleReset();
@@ -74,11 +76,13 @@ function App() {
     setSelectedAlgorithm(selectedAlgorithm);
     resetTimer();
     setData(workingData);
+    setRecordSnapshots([]);
   };
 
   const handleChangeDataCount = (_, value) => {
     setDataCount(value);
     resetData();
+    setRecordSnapshots([]);
   };
 
   const resetData = () => {
