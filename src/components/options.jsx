@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 import CustomSlider from "./common/customSlider";
 
 function Options({ onChangeSpeed, speed, dataCount, onChangeDataCount }) {
-  const maxDataCount = 300;
+  const maxDataCount = 120;
   const formattedSpeed = (speed / 1000).toFixed(2);
   const maxSpeed = 1500;
   const speedTitle = `Speed (${formattedSpeed} sec)`;
