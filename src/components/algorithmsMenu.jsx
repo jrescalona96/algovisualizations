@@ -51,7 +51,7 @@ function AlgorithmsMenu({
           size="small"
           startIcon={isTimerSet ? <SwapHorizIcon /> : <PlayCircleOutlineIcon />}
         >
-          {isTimerSet ? "Reset" : "Start"}
+          {isTimerSet ? "STOP" : "START"}
         </Button>
       </Grid>
     </div>

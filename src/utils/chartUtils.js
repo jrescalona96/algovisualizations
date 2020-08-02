@@ -15,7 +15,7 @@ const _getFocusNodeIds = (nodes, data) => {
   return nodes.map((nodeIndex) => data[nodeIndex]._id);
 };
 
-export const mapChartData = (snapshots) => {
+export const mapChartData = async (snapshots) => {
   return snapshots.map((iter) => {
     let x = 0;
     const { name, data } = iter;

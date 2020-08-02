@@ -7,7 +7,7 @@ let snapshots;
 export const selectionSort = (nums) => {
   snapshots = [];
   let data = [...nums];
-  data.length < 100 ? _selectionSortSmall(data) : _selectionSortLarge(data);
+  data.length <= 300 ? _selectionSortSmall(data) : _selectionSortLarge(data);
   snapshots = record(data, [], _.range(0, data.length), snapshots);
   return { data, snapshots };
 };

@@ -11,7 +11,6 @@ import SortingPage from "./components/sortingPage/sortingPage";
 import SearchingPage from "./components/searchingPage/searchingPage";
 
 import "./App.scss";
-import Load from "./components/common/load/load";
 
 function App() {
   const baseRoute = "/algovisualizations";
@@ -21,6 +20,7 @@ function App() {
   const [dataCount, setDataCount] = useState(20);
   const [data, setData] = useState(generateData(dataCount));
   const [workingData, setWorkingData] = useState(data);
+  const [record, setRecord] = useState([]);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(sort[0]);
 
   const resetTimer = () => {
@@ -28,10 +28,9 @@ function App() {
     setTimer(0);
   };
 
-  const runAlgorithm = () => {
+  const runAlgorithm = async () => {
     const { snapshots } = selectedAlgorithm.algorithm(workingData);
-    const mapped = mapChartData(snapshots);
-    runVisualization(mapped, 0);
+    return await mapChartData(snapshots);
   };
 
   const runVisualization = (snapshots, index) => {
@@ -45,13 +44,24 @@ function App() {
     );
   };
 
-  const handleStart = () => {
-    if (timer === 0) {
-      runAlgorithm();
+  const handleStart = async () => {
+    const notRunning = timer === 0;
+    if (notRunning) {
+      const noRecordAvailable = record.length === 0;
+      if (noRecordAvailable) {
+        const mapped = await runAlgorithm();
+        setRecord(mapped);
+      } else {
+        runVisualization(record, 0);
+      }
     } else {
-      resetTimer();
-      resetData();
+      handleReset();
     }
+  };
+
+  const handleReset = () => {
+    resetTimer();
+    resetData();
   };
 
   const handleChangeSpeed = (_, value) => {
