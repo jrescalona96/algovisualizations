@@ -1,24 +1,21 @@
 import React, { useContext } from "react";
-import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
-import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 import { Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import DataContext from "../context/DataContext";
+import DataContext from "../../context/DataContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
     marginBottom: theme.spacing(0),
   },
   button: {
+    display: "fixed",
     margin: theme.spacing(1),
   },
 }));
 
-function AlgorithmsMenu({ algorithms }) {
+function AlgorithmsMenu() {
   const data = useContext(DataContext);
   const classes = useStyles();
-  const isTimerSet = data.timer > 0;
   return (
     <div className={classes.root}>
       <Grid container justify="space-evenly">
@@ -39,16 +36,6 @@ function AlgorithmsMenu({ algorithms }) {
             </Grid>
           );
         })}
-        <Button
-          className={classes.options}
-          variant="contained"
-          color={isTimerSet ? "default" : "secondary"}
-          onClick={data.handleStart}
-          size="small"
-          startIcon={isTimerSet ? <SwapHorizIcon /> : <PlayCircleOutlineIcon />}
-        >
-          {isTimerSet ? "STOP" : "START"}
-        </Button>
       </Grid>
     </div>
   );

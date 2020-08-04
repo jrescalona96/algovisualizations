@@ -1,11 +1,11 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { generateData } from "./services/testData/data";
 import { sort } from "./algorithms/index";
 import { mapChartData } from "./utils/chartUtils";
 
-import NavBar from "./components/navBar";
+import NavBar from "./components/navBar/navBar";
 import HomePage from "./components/homePage/homePage";
 import SortingPage from "./components/sortingPage/sortingPage";
 import SearchingPage from "./components/searchingPage/searchingPage";
@@ -15,8 +15,6 @@ import { DataProvider } from "./context/DataContext";
 import "./App.scss";
 
 function App() {
-  const baseRoute = "/algovisualizations";
-  const title = "algovisualizations";
   const [speed, setSpeed] = useState(100);
   const [timer, setTimer] = useState(0);
   const [dataCount, setDataCount] = useState(20);
@@ -50,15 +48,14 @@ function App() {
     let newData = generateData(dataCount);
     resetTimer();
     setWorkingData(newData);
-    setData(workingData);
+    setData(newData);
   };
 
   const handleStart = async () => {
     const notRunning = timer === 0;
     if (notRunning) {
-      const noRecordAvailable = recordSnapshots.length === 0;
-
-      if (noRecordAvailable) {
+      const noSnapshotsRecorded = recordSnapshots.length === 0;
+      if (noSnapshotsRecorded) {
         const mapped = await runAlgorithm();
         setRecordSnapshots(mapped);
         runVisualization(mapped, 0);
@@ -94,21 +91,23 @@ function App() {
     setRecordSnapshots([]);
   };
 
+  const contextValue = {
+    data,
+    dataCount,
+    speed,
+    timer,
+    sort,
+    selectedAlgorithm,
+    handleStart,
+    handleChangeDataCount,
+    handleChangeSpeed,
+    handleSetSelectedAlgorithm,
+  };
+  const baseRoute = "/algovisualizations";
+  const title = "algovisualizations";
+
   return (
-    <DataProvider
-      value={{
-        data,
-        dataCount,
-        speed,
-        timer,
-        sort,
-        selectedAlgorithm,
-        handleStart,
-        handleChangeDataCount,
-        handleChangeSpeed,
-        handleSetSelectedAlgorithm,
-      }}
-    >
+    <DataProvider value={contextValue}>
       <Fragment>
         <NavBar title={title} />
         <main>
@@ -125,7 +124,6 @@ function App() {
             <Redirect from={`${baseRoute}/*`} to={baseRoute} />
           </Switch>
         </main>
-        )
       </Fragment>
     </DataProvider>
   );

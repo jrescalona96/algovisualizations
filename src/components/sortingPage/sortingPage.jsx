@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { Container, Typography } from "@material-ui/core";
+import React from "react";
+import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Chart from "../common/chart";
-import AlgorithmsMenu from "../algorithmsMenu";
-import Options from "../options";
-import DataContext from "../../context/DataContext";
+import Header from "../header/header";
+import Controls from "../controls/controls";
+import AlgorithmsMenu from "../algorithmsMenu/algorithmsMenu";
 import "./sortingPage.scss";
 
 const useStyles = makeStyles((theme) => ({
@@ -12,27 +12,16 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     marginBottom: theme.spacing(0),
   },
-  options: {
-    position: "fixed",
-    bottom: theme.spacing(2),
-  },
 }));
 
 function SortingPage() {
-  const data = useContext(DataContext);
   const classes = useStyles();
   return (
-    <Container id="pageContainer">
-      <React.Fragment>
-        <Typography className="chart-header" variant="h3">
-          {data.selectedAlgorithm.name}
-        </Typography>
-        <Chart id="chart" data={data} />
-        <AlgorithmsMenu />
-        <Container className={classes.options}>
-          <Options />
-        </Container>
-      </React.Fragment>
+    <Container id="pageContainer" className={classes.root}>
+      <Header />
+      <Chart />
+      <AlgorithmsMenu />
+      <Controls />
     </Container>
   );
 }

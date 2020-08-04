@@ -1,7 +1,8 @@
 #commit, merge, push changes from dev
-printf "\n====================== stage changes =============================\n\n"
 git add .
-printf "\n====================== commit changes ============================\n\n"
+printf "\n====================== stage changes =============================\n\n"
+git status
+printf "\n====================== committing changes ========================\n\n"
 printf "commit with $1"
 git commit -m "$1"
 printf "\n=================== merged master to dev =========================\n\n"

@@ -19,7 +19,7 @@ function Chart() {
       "teal",
       "darkblue",
     ],
-    height: 500,
+    height: window.innerHeight * 0.65,
     width: window.innerWidth * 0.95,
   };
 

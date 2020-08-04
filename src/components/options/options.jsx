@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Grid } from "@material-ui/core";
-import CustomSlider from "./common/customSlider";
-import DataContext from "../context/DataContext";
+import CustomSlider from "../common/customSlider";
+import DataContext from "../../context/DataContext";
 
 function Options() {
   const data = useContext(DataContext);
@@ -13,7 +13,7 @@ function Options() {
 
   return (
     <Grid container justify="center">
-      <Grid item xs={12} sm={5}>
+      <Grid item xs={5}>
         <CustomSlider
           title={speedTitle}
           maxValue={maxSpeed}
@@ -22,7 +22,7 @@ function Options() {
         />
       </Grid>
       <Grid item xs={1}></Grid>
-      <Grid item xs={12} sm={5}>
+      <Grid item xs={5}>
         <CustomSlider
           title={dataCountTitle}
           maxValue={maxDataCount}
