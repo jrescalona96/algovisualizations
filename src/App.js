@@ -44,6 +44,13 @@ function App() {
     );
   };
 
+  const resetData = () => {
+    let newData = generateData(dataCount);
+    resetTimer();
+    setWorkingData(newData);
+    setData(workingData);
+  };
+
   const handleStart = async () => {
     const notRunning = timer === 0;
     if (notRunning) {
@@ -83,13 +90,6 @@ function App() {
     setDataCount(value);
     resetData();
     setRecordSnapshots([]);
-  };
-
-  const resetData = () => {
-    let newData = generateData(dataCount);
-    resetTimer();
-    setWorkingData(newData);
-    setData(workingData);
   };
 
   return (
