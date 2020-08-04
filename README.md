@@ -13,18 +13,14 @@ https://jrescalona96.github.io/algovisualizations/
 - Merge Sort
 - Quick Sort
 
-### Drag slider to change speed of simulation, then hit reset.
+### Toggle desired algorithm to run
 
-![Speed Slider](https://github.com/jrescalona96/algovisualizations/blob/master/public/demopic1.png)
+![Algorithm Picker](https://github.com/jrescalona96/algovisualizations/blob/master/public/demopic1.png)
 
-### Drag slider to increase or decrease the number of working data then hit reset. To see the values of each data item, decrease working data set to at most 30.
+### Drag slider to change speed of simulation.
 
-![Data Set Slider](https://github.com/jrescalona96/algovisualizations/blob/master/public/demopic2.png)
+### Drag slider to increase or decrease the number of working data. To see the values of each data item, decrease working data set to at most 50.
 
-### Click "Algorithm" button to change executing algorithm. "Start" to start simulation.
-
-![Change Algorithm/ Start Button](https://github.com/jrescalona96/algovisualizations/blob/master/public/demopic3.png)
-
-> Note: Every simulation will have a different data set.
+![Sliders](https://github.com/jrescalona96/algovisualizations/blob/master/public/demopic2.png)
 
 ### Check out my other works at [johnescalona.com](https://johnescalona.com/)
