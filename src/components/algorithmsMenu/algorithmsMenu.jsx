@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import DataContext from "../../context/DataContext";
+import AlgorithmsContext from "../../context/AlgorithmsContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,22 +14,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function AlgorithmsMenu() {
-  const data = useContext(DataContext);
+  const { selectedAlgorithm, handleSetSelectedAlgorithm, sort } = useContext(
+    AlgorithmsContext
+  );
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <Grid container justify="space-evenly">
-        {data.sort.map((item) => {
+        {sort.map((item) => {
           const { _id, name } = item;
           const variant =
-            _id === data.selectedAlgorithm._id ? "contained" : "outlined";
+            _id === selectedAlgorithm._id ? "contained" : "outlined";
           return (
             <Grid key={_id} item>
               <Button
                 className={classes.options}
                 variant={variant}
                 color="primary"
-                onClick={() => data.handleSetSelectedAlgorithm(_id)}
+                onClick={() => handleSetSelectedAlgorithm(_id)}
               >
                 {name}
               </Button>

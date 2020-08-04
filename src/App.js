@@ -11,6 +11,8 @@ import SortingPage from "./components/sortingPage/sortingPage";
 import SearchingPage from "./components/searchingPage/searchingPage";
 
 import { DataProvider } from "./context/DataContext";
+import { ControlsProvider } from "./context/ControlsContext";
+import { AlgorithmsProvider } from "./context/AlgorithmsContext";
 
 import "./App.scss";
 
@@ -91,40 +93,47 @@ function App() {
     setRecordSnapshots([]);
   };
 
-  const contextValue = {
-    data,
-    dataCount,
-    speed,
-    timer,
-    sort,
-    selectedAlgorithm,
-    handleStart,
-    handleChangeDataCount,
-    handleChangeSpeed,
-    handleSetSelectedAlgorithm,
-  };
   const baseRoute = "/algovisualizations";
   const title = "algovisualizations";
 
+  const algorithmsContext = {
+    sort,
+    selectedAlgorithm,
+    handleSetSelectedAlgorithm,
+  };
+
+  const controlsContext = {
+    speed,
+    dataCount,
+    timer,
+    handleChangeSpeed,
+    handleStart,
+    handleChangeDataCount,
+  };
+
   return (
-    <DataProvider value={contextValue}>
-      <Fragment>
-        <NavBar title={title} />
-        <main>
-          <Switch>
-            <Route exact path={baseRoute} component={() => <HomePage />} />
-            <Route
-              path={`${baseRoute}/searching`}
-              render={(props) => <SearchingPage {...props} />}
-            />
-            <Route
-              path={`${baseRoute}/sorting`}
-              render={(props) => <SortingPage {...props} />}
-            />
-            <Redirect from={`${baseRoute}/*`} to={baseRoute} />
-          </Switch>
-        </main>
-      </Fragment>
+    <DataProvider value={data}>
+      <ControlsProvider value={controlsContext}>
+        <AlgorithmsProvider value={algorithmsContext}>
+          <Fragment>
+            <NavBar title={title} />
+            <main>
+              <Switch>
+                <Route exact path={baseRoute} component={() => <HomePage />} />
+                <Route
+                  path={`${baseRoute}/searching`}
+                  render={(props) => <SearchingPage {...props} />}
+                />
+                <Route
+                  path={`${baseRoute}/sorting`}
+                  render={(props) => <SortingPage {...props} />}
+                />
+                <Redirect from={`${baseRoute}/*`} to={baseRoute} />
+              </Switch>
+            </main>
+          </Fragment>
+        </AlgorithmsProvider>
+      </ControlsProvider>
     </DataProvider>
   );
 }

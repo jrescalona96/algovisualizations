@@ -4,8 +4,9 @@ import { Grid } from "@material-ui/core";
 import DataContext from "../../context/DataContext";
 
 function Chart() {
-  const { data } = useContext(DataContext);
-  const hasMinimalData = data.length <= 40;
+  const data = useContext(DataContext);
+  const hasMinimalData = data.length <= 50;
+
   const options = {
     colorType: "category",
     colorDomain: [0, 1, 2, 4, 5, 6, 7],

@@ -1,15 +1,21 @@
 import React, { useContext } from "react";
 import { Grid } from "@material-ui/core";
 import CustomSlider from "../common/customSlider";
-import DataContext from "../../context/DataContext";
+import ControlsContext from "../../context/ControlsContext";
 
 function Options() {
-  const data = useContext(DataContext);
+  const {
+    speed,
+    dataCount,
+    handleChangeSpeed,
+    handleChangeDataCount,
+  } = useContext(ControlsContext);
+
   const maxDataCount = 120;
-  const formattedSpeed = (data.speed / 1000).toFixed(2);
+  const formattedSpeed = (speed / 1000).toFixed(2);
   const maxSpeed = 1500;
   const speedTitle = `Speed (${formattedSpeed} sec)`;
-  const dataCountTitle = `Count (${data.dataCount})`;
+  const dataCountTitle = `Count (${dataCount})`;
 
   return (
     <Grid container justify="center">
@@ -17,8 +23,8 @@ function Options() {
         <CustomSlider
           title={speedTitle}
           maxValue={maxSpeed}
-          onChange={data.handleChangeSpeed}
-          value={data.speed}
+          onChange={handleChangeSpeed}
+          value={speed}
         />
       </Grid>
       <Grid item xs={1}></Grid>
@@ -26,8 +32,8 @@ function Options() {
         <CustomSlider
           title={dataCountTitle}
           maxValue={maxDataCount}
-          onChange={data.handleChangeDataCount}
-          value={data.dataCount}
+          onChange={handleChangeDataCount}
+          value={dataCount}
         />
       </Grid>
     </Grid>

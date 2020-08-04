@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import DataContext from "../../context/DataContext";
+import ControlsContext from "../../context/ControlsContext";
 import { Button } from "@material-ui/core";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 
 function StartButton() {
-  const { handleStart, timer } = useContext(DataContext);
+  const { handleStart, timer } = useContext(ControlsContext);
   const isTimerSet = timer > 0;
 
   return (

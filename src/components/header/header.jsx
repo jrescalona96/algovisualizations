@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Typography } from "@material-ui/core";
-import DataContext from "../../context/DataContext";
+import AlgorithmsContext from "../../context/AlgorithmsContext";
 function Header() {
-  const { selectedAlgorithm } = useContext(DataContext);
+  const { selectedAlgorithm } = useContext(AlgorithmsContext);
   return (
     <Typography className="chart-header" variant="h3">
       {selectedAlgorithm.name}
