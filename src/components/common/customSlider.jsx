@@ -3,6 +3,7 @@ import { Slider, Tooltip, Grid, Typography, Button } from "@material-ui/core";
 
 function ValueLabelComponent(props) {
   const { children, open, value } = props;
+
   return (
     <Tooltip
       open={open}

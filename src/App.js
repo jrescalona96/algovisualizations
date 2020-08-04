@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { generateData } from "./services/testData/data";
@@ -9,6 +9,8 @@ import NavBar from "./components/navBar";
 import HomePage from "./components/homePage/homePage";
 import SortingPage from "./components/sortingPage/sortingPage";
 import SearchingPage from "./components/searchingPage/searchingPage";
+
+import { DataProvider } from "./context/DataContext";
 
 import "./App.scss";
 
@@ -93,38 +95,39 @@ function App() {
   };
 
   return (
-    <Fragment>
-      <NavBar title={title} />
-      <main>
-        <Switch>
-          <Route exact path={baseRoute} component={() => <HomePage />} />
-          <Route
-            path={`${baseRoute}/searching`}
-            render={(props) => <SearchingPage {...props} />}
-          />
-          <Route
-            path={`${baseRoute}/sorting`}
-            render={(props) => (
-              <SortingPage
-                data={data}
-                selectedAlgorithm={selectedAlgorithm}
-                algorithms={sort}
-                timer={timer}
-                speed={speed}
-                dataCount={dataCount}
-                onStart={handleStart}
-                onChangeSpeed={handleChangeSpeed}
-                onChangeDataCount={handleChangeDataCount}
-                onSetSelectedAlgorithm={handleSetSelectedAlgorithm}
-                {...props}
-              />
-            )}
-          />
-          <Redirect from={`${baseRoute}/*`} to={baseRoute} />
-        </Switch>
-      </main>
-      )
-    </Fragment>
+    <DataProvider
+      value={{
+        data,
+        dataCount,
+        speed,
+        timer,
+        sort,
+        selectedAlgorithm,
+        handleStart,
+        handleChangeDataCount,
+        handleChangeSpeed,
+        handleSetSelectedAlgorithm,
+      }}
+    >
+      <Fragment>
+        <NavBar title={title} />
+        <main>
+          <Switch>
+            <Route exact path={baseRoute} component={() => <HomePage />} />
+            <Route
+              path={`${baseRoute}/searching`}
+              render={(props) => <SearchingPage {...props} />}
+            />
+            <Route
+              path={`${baseRoute}/sorting`}
+              render={(props) => <SortingPage {...props} />}
+            />
+            <Redirect from={`${baseRoute}/*`} to={baseRoute} />
+          </Switch>
+        </main>
+        )
+      </Fragment>
+    </DataProvider>
   );
 }
 
