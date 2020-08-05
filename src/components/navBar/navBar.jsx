@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { sort, search } from "../../algorithms";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
+import AlgorithmsContext from "../../context/AlgorithmsContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function NavBar({ title }) {
+  const { handleSetSelectedAlgorithm } = useContext(AlgorithmsContext);
   const baseRoute = "/algovisualizations";
   const classes = useStyles();
 
@@ -29,10 +32,24 @@ function NavBar({ title }) {
             </Typography>
           </NavLink>
           <NavLink to={`${baseRoute}/sorting`} className={classes.button}>
-            <Button color="inherit">Sorting</Button>
+            <Button
+              color="inherit"
+              onClick={() => {
+                handleSetSelectedAlgorithm(sort[0]);
+              }}
+            >
+              Sorting
+            </Button>
           </NavLink>
           <NavLink to={`${baseRoute}/searching`} className={classes.button}>
-            <Button color="inherit">Searching</Button>
+            <Button
+              color="inherit"
+              onClick={() => {
+                handleSetSelectedAlgorithm(search[0]);
+              }}
+            >
+              Searching
+            </Button>
           </NavLink>
         </Toolbar>
       </AppBar>

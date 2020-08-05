@@ -19,15 +19,14 @@ export const mapChartData = async (snapshots) => {
   return snapshots.map((iter) => {
     let x = 0;
     const { name, data } = iter;
-    const snapshot = data.map(({ _id, y }) => {
-      return {
-        _id: _id,
-        x: x++,
-        y: y,
-        size: y,
-        color: _getColor(_id, iter),
-        opacity: _getOpacity(_id, iter),
-      };
+    const snapshot = data.map((item) => {
+      let record = { ...item };
+      record.x = x++;
+      record.size = item.y;
+      record.elevation = _getColor(item._id, iter);
+      record.color = _getColor(item._id, iter);
+      record.opacity = _getOpacity(item._id, iter);
+      return record;
     });
     return { name, data: snapshot };
   });

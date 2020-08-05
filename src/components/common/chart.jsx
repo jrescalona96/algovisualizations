@@ -9,18 +9,9 @@ function Chart() {
 
   const options = {
     colorType: "category",
-    colorDomain: [0, 1, 2, 4, 5, 6, 7],
-    colorRange: [
-      "#3f51b5",
-      "orange",
-      "red",
-      "indigo",
-      "green",
-      "yellow",
-      "teal",
-      "darkblue",
-    ],
-    height: window.innerHeight * 0.65,
+    colorDomain: [0, 1, 2],
+    colorRange: ["#3f51b5", "orange", "red"],
+    height: window.innerWidth * 0.45,
     width: window.innerWidth * 0.95,
   };
 

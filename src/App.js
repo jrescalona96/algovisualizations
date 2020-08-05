@@ -2,8 +2,8 @@ import React, { Fragment, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { generateData } from "./services/testData/data";
-import { sort } from "./algorithms/index";
 import { mapChartData } from "./utils/chartUtils";
+import { sort, search } from "./algorithms/index";
 
 import NavBar from "./components/navBar/navBar";
 import HomePage from "./components/homePage/homePage";
@@ -17,13 +17,13 @@ import { AlgorithmsProvider } from "./context/AlgorithmsContext";
 import "./App.scss";
 
 function App() {
-  const [speed, setSpeed] = useState(100);
-  const [timer, setTimer] = useState(0);
   const [dataCount, setDataCount] = useState(20);
   const [data, setData] = useState(generateData(dataCount));
+  const [speed, setSpeed] = useState(100);
+  const [timer, setTimer] = useState(0);
   const [workingData, setWorkingData] = useState(data);
   const [recordSnapshots, setRecordSnapshots] = useState([]);
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState(sort[0]);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState({});
 
   const resetTimer = () => {
     clearTimeout(timer);
@@ -79,9 +79,8 @@ function App() {
     setSpeed(value);
   };
 
-  const handleSetSelectedAlgorithm = (_id) => {
-    const selectedAlgorithm = sort.find((item) => item._id === _id);
-    setSelectedAlgorithm(selectedAlgorithm);
+  const handleSetSelectedAlgorithm = (algorithm) => {
+    setSelectedAlgorithm(algorithm);
     resetTimer();
     setData(workingData);
     setRecordSnapshots([]);
@@ -97,7 +96,6 @@ function App() {
   const title = "algovisualizations";
 
   const algorithmsContext = {
-    sort,
     selectedAlgorithm,
     handleSetSelectedAlgorithm,
   };

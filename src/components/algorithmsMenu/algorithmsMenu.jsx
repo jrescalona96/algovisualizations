@@ -1,37 +1,25 @@
 import React, { useContext } from "react";
-import { Button, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Container, Button, Grid } from "@material-ui/core";
 import AlgorithmsContext from "../../context/AlgorithmsContext";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginBottom: theme.spacing(0),
-  },
-  button: {
-    display: "fixed",
-    margin: theme.spacing(1),
-  },
-}));
-
-function AlgorithmsMenu() {
-  const { selectedAlgorithm, handleSetSelectedAlgorithm, sort } = useContext(
+function AlgorithmsMenu({ algorithms }) {
+  const { selectedAlgorithm, handleSetSelectedAlgorithm } = useContext(
     AlgorithmsContext
   );
-  const classes = useStyles();
+
   return (
-    <div className={classes.root}>
+    <Container>
       <Grid container justify="space-evenly">
-        {sort.map((item) => {
+        {algorithms.map((item) => {
           const { _id, name } = item;
           const variant =
             _id === selectedAlgorithm._id ? "contained" : "outlined";
           return (
             <Grid key={_id} item>
               <Button
-                className={classes.options}
                 variant={variant}
                 color="primary"
-                onClick={() => handleSetSelectedAlgorithm(_id)}
+                onClick={() => handleSetSelectedAlgorithm(item)}
               >
                 {name}
               </Button>
@@ -39,7 +27,7 @@ function AlgorithmsMenu() {
           );
         })}
       </Grid>
-    </div>
+    </Container>
   );
 }
 
