@@ -8,7 +8,7 @@ export function generateData(totalCount) {
     const size = y;
     const color = 0;
     const opacity = 0.8;
-    const elevation = 0;
+    const elevation = 1;
     data.push({ _id, x, y, size, color, opacity, elevation });
   }
 

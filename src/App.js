@@ -3,7 +3,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import { generateData } from "./services/testData/data";
 import { mapChartData } from "./utils/chartUtils";
-import { sort, search } from "./algorithms/index";
 
 import NavBar from "./components/navBar/navBar";
 import HomePage from "./components/homePage/homePage";

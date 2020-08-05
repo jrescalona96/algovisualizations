@@ -7,7 +7,7 @@ function Chart() {
   const data = useContext(DataContext);
   const hasMinimalData = data.length <= 50;
 
-  const options = {
+  const chartOptions = {
     colorType: "category",
     colorDomain: [0, 1, 2],
     colorRange: ["#3f51b5", "orange", "red"],
@@ -21,7 +21,7 @@ function Chart() {
 
   return (
     <Grid container justify="center">
-      <XYPlot {...options}>
+      <XYPlot {...chartOptions}>
         <VerticalBarSeries data={data} />
         {hasMinimalData && showDataLabels()}
       </XYPlot>
