@@ -23,48 +23,48 @@ function App() {
   const [workingData, setWorkingData] = useState(data);
   const [recordSnapshots, setRecordSnapshots] = useState([]);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState({});
+  const [searchItem, setSearchItem] = useState(96);
 
   const resetTimer = () => {
     clearTimeout(timer);
     setTimer(0);
   };
 
-  const runAlgorithm = async () => {
-    const { snapshots } = selectedAlgorithm.algorithm(workingData);
-    return await mapChartData(snapshots);
+  const runAlgorithm = () => {
+    const { snapshots } = selectedAlgorithm.algorithm({
+      workingData,
+      searchItem,
+    });
+    return mapChartData(snapshots);
   };
-
-  const runVisualization = (snapshots, index) => {
-    setData(snapshots[index].data);
-    setTimer(
-      setTimeout(() => {
-        if (index < snapshots.length - 1) {
-          runVisualization(snapshots, index + 1);
-        }
-      }, speed)
-    );
-  };
-
   const resetData = () => {
     let newData = generateData(dataCount);
     resetTimer();
     setWorkingData(newData);
+    setRecordSnapshots([]);
     setData(newData);
   };
 
-  const handleStart = async () => {
-    const notRunning = timer === 0;
-    if (notRunning) {
-      const noSnapshotsRecorded = recordSnapshots.length === 0;
-      if (noSnapshotsRecorded) {
-        const mapped = await runAlgorithm();
-        setRecordSnapshots(mapped);
-        runVisualization(mapped, 0);
+  const runVisualization = (snapshots, index) => {
+    setData(snapshots[index].data);
+    const currTimer = setTimeout(() => {
+      if (index < snapshots.length - 1) {
+        runVisualization(snapshots, index + 1);
       } else {
-        runVisualization(recordSnapshots, 0);
+        resetTimer();
       }
+    }, speed);
+    setTimer(currTimer);
+  };
+
+  const handleStart = () => {
+    const noSnapshotsRecorded = recordSnapshots.length === 0;
+    if (noSnapshotsRecorded) {
+      const mapped = runAlgorithm();
+      setRecordSnapshots(mapped);
+      runVisualization(mapped, 0);
     } else {
-      handleReset();
+      runVisualization(recordSnapshots, 0);
     }
   };
 
@@ -79,20 +79,33 @@ function App() {
   };
 
   const handleSetSelectedAlgorithm = (algorithm) => {
-    setSelectedAlgorithm(algorithm);
     resetTimer();
+    setSelectedAlgorithm(algorithm);
     setData(workingData);
     setRecordSnapshots([]);
   };
 
   const handleChangeDataCount = (_, value) => {
-    setDataCount(value);
     resetData();
+    setRecordSnapshots([]);
+    setDataCount(value);
+  };
+
+  const handleChangeSearchItem = (event) => {
+    resetTimer();
+    const { value } = event.target;
+    setSearchItem(value);
     setRecordSnapshots([]);
   };
 
   const baseRoute = "/algovisualizations";
   const title = "algovisualizations";
+
+  const dataContext = {
+    data,
+    searchItem,
+    handleChangeSearchItem,
+  };
 
   const algorithmsContext = {
     selectedAlgorithm,
@@ -106,10 +119,11 @@ function App() {
     handleChangeSpeed,
     handleStart,
     handleChangeDataCount,
+    handleReset,
   };
 
   return (
-    <DataProvider value={data}>
+    <DataProvider value={dataContext}>
       <ControlsProvider value={controlsContext}>
         <AlgorithmsProvider value={algorithmsContext}>
           <Fragment>

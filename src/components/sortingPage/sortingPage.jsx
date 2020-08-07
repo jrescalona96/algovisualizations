@@ -1,8 +1,7 @@
 import React from "react";
-
 import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Chart from "../common/chart";
+import Chart from "../common/chart/chart";
 import Header from "../header/header";
 import Controls from "../controls/controls";
 import { sort } from "../../algorithms/index";

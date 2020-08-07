@@ -4,8 +4,8 @@ import _ from "lodash";
 
 let snapshots;
 
-export const insertionSort = (nums) => {
-  let data = [...nums];
+export const insertionSort = ({ workingData }) => {
+  let data = [...workingData];
   snapshots = [];
   _insertionSort(data);
   snapshots = record(data, [], _.range(0, data.length), snapshots);

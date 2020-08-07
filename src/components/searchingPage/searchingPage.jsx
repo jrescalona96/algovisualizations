@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import DataContext from "../../context/DataContext";
-import { Container, Grid, Paper } from "@material-ui/core";
+import { Container, Grid, Paper, OutlinedInput } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { search } from "../../algorithms/index";
 import Header from "../header/header";
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => {
     visualizer: {
       display: "flex",
       alignItems: "center",
-      width: "660px",
+      width: "100%",
       maxHeight: "65vh",
       overflow: "auto",
     },
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => {
 });
 
 function SortingPage() {
-  const data = useContext(DataContext);
+  const { data, searchItem, handleChangeSearchItem } = useContext(DataContext);
   const classes = useStyles();
 
   const _getPaperClass = (color) => {
@@ -60,6 +60,13 @@ function SortingPage() {
   return (
     <Container id="pageContainer" className={classes.root}>
       <Header />
+      <OutlinedInput
+        variant="outlined"
+        size="small"
+        margin="dense"
+        defaultValue={searchItem}
+        onChange={handleChangeSearchItem}
+      />
       <Container className={classes.visualizer}>
         <Grid container justify="center">
           {data.map((item) => {

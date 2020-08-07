@@ -4,8 +4,8 @@ import _ from "lodash";
 
 let snapshots;
 
-export const bubbleSort = (nums) => {
-  let data = [...nums];
+export const bubbleSort = ({ workingData }) => {
+  let data = [...workingData];
   snapshots = [];
   _bubbleSort(data);
   snapshots = record(data, [], _.range(data.length), snapshots);

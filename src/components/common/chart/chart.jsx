@@ -1,17 +1,16 @@
 import React, { useContext } from "react";
 import { XYPlot, VerticalBarSeries, LabelSeries } from "react-vis";
 import { Grid } from "@material-ui/core";
-import DataContext from "../../context/DataContext";
+import DataContext from "../../../context/DataContext";
 
 function Chart() {
-  const data = useContext(DataContext);
+  const { data } = useContext(DataContext);
   const hasMinimalData = data.length <= 50;
-
   const chartOptions = {
     colorType: "category",
     colorDomain: [0, 1, 2],
     colorRange: ["#3f51b5", "orange", "red"],
-    height: window.innerWidth * 0.45,
+    height: window.innerHeight * 0.65,
     width: window.innerWidth * 0.95,
   };
 

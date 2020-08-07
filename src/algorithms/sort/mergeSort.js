@@ -4,9 +4,9 @@ import _ from "lodash";
 
 let snapshots;
 
-export const mergeSort = (nums) => {
+export const mergeSort = ({ workingData }) => {
   snapshots = [];
-  let data = [...nums];
+  let data = [...workingData];
   _mergeSort(data, 0, data.length - 1);
   snapshots = record(data, [], _.range(0, data.length), snapshots);
   return { data, snapshots };

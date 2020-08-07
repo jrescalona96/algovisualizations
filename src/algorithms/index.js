@@ -3,6 +3,8 @@ import { insertionSort } from "./sort/insertionSort";
 import { mergeSort } from "./sort/mergeSort";
 import { quickSort } from "./sort/quickSort";
 import { bubbleSort } from "./sort/bubbleSort";
+import { linearSearch } from "./search/linearSearch";
+import { binarySearch } from "./search/binarySearch";
 
 export const sort = [
   {
@@ -32,11 +34,11 @@ export const search = [
   {
     _id: "linear_search",
     name: "LINEAR SEARCH",
-    algorithm: bubbleSort,
+    algorithm: linearSearch,
   },
   {
     _id: "binary_search",
     name: "BINARY SEARCH",
-    algorithm: bubbleSort,
+    algorithm: binarySearch,
   },
 ];

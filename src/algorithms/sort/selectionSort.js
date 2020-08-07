@@ -4,9 +4,9 @@ import _ from "lodash";
 
 let snapshots;
 
-export const selectionSort = (nums) => {
+export const selectionSort = ({ workingData }) => {
   snapshots = [];
-  let data = [...nums];
+  let data = [...workingData];
   data.length <= 300 ? _selectionSortSmall(data) : _selectionSortLarge(data);
   snapshots = record(data, [], _.range(0, data.length), snapshots);
   return { data, snapshots };

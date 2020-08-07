@@ -3,9 +3,9 @@ import { record } from "../../utils/chartUtils";
 import _ from "lodash";
 
 let snapshots = [];
-export const quickSort = (nums) => {
+export const quickSort = ({ workingData }) => {
   snapshots = [];
-  let data = [...nums];
+  let data = [...workingData];
   _quickSort(data, 0, data.length - 1);
   snapshots = record(data, [], _.range(0, data.length), snapshots);
   return { data, snapshots };

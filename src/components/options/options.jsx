@@ -19,7 +19,7 @@ function Options() {
 
   return (
     <Grid container justify="center">
-      <Grid item xs={5}>
+      <Grid item xs={12} sm={5}>
         <CustomSlider
           title={speedTitle}
           maxValue={maxSpeed}
@@ -27,8 +27,8 @@ function Options() {
           value={speed}
         />
       </Grid>
-      <Grid item xs={1}></Grid>
-      <Grid item xs={5}>
+      <Grid item xs={1} />
+      <Grid item xs={12} sm={5}>
         <CustomSlider
           title={dataCountTitle}
           maxValue={maxDataCount}

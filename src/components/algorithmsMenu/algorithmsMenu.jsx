@@ -9,14 +9,15 @@ function AlgorithmsMenu({ algorithms }) {
 
   return (
     <Container>
-      <Grid container justify="space-evenly">
+      <Grid container justify="space-evenly" alignContent="center">
         {algorithms.map((item) => {
           const { _id, name } = item;
           const variant =
             _id === selectedAlgorithm._id ? "contained" : "outlined";
           return (
-            <Grid key={_id} item>
+            <Grid item xs={12} sm={2} key={_id}>
               <Button
+                fullWidth
                 variant={variant}
                 color="primary"
                 onClick={() => handleSetSelectedAlgorithm(item)}
