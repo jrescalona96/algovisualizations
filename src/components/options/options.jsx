@@ -14,11 +14,11 @@ function Options() {
   const maxDataCount = 120;
   const formattedSpeed = (speed / 1000).toFixed(2);
   const maxSpeed = 1500;
-  const speedTitle = `Speed (${formattedSpeed} sec)`;
+  const speedTitle = `Speed (${formattedSpeed}s)`;
   const dataCountTitle = `Count (${dataCount})`;
 
   return (
-    <Grid container justify="center">
+    <Grid container justify="space-evenly">
       <Grid item xs={12} sm={5}>
         <CustomSlider
           title={speedTitle}
@@ -27,7 +27,6 @@ function Options() {
           value={speed}
         />
       </Grid>
-      <Grid item xs={1} />
       <Grid item xs={12} sm={5}>
         <CustomSlider
           title={dataCountTitle}

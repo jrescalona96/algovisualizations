@@ -23,7 +23,7 @@ function App() {
   const [workingData, setWorkingData] = useState(data);
   const [recordSnapshots, setRecordSnapshots] = useState([]);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState({});
-  const [searchItem, setSearchItem] = useState(data[data.length - 2].y);
+  const [searchItem, setSearchItem] = useState(0);
 
   const resetTimer = () => {
     clearTimeout(timer);

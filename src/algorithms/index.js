@@ -36,9 +36,9 @@ export const search = [
     name: "LINEAR SEARCH",
     algorithm: linearSearch,
   },
-  {
-    _id: "binary_search",
-    name: "BINARY SEARCH",
-    algorithm: binarySearch,
-  },
+  // {
+  //   _id: "binary_search",
+  //   name: "BINARY SEARCH",
+  //   algorithm: binarySearch,
+  // },
 ];

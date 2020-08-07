@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Grid, Paper } from "@material-ui/core";
+import { Container, Grid, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => {
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => {
       display: "flex",
       alignItems: "center",
       width: "100%",
-      maxHeight: "65vh",
+      height: "55vh",
       overflow: "auto",
     },
     paper0: {
@@ -45,20 +45,26 @@ function GridDisplay({ data }) {
   return (
     <Container className={classes.root}>
       <Grid container justify="center">
-        {data.map((item) => {
-          const paperClass = _getPaperClass(item.color);
-          return (
-            <Grid key={item._id} item>
-              <Paper
-                variant="elevation"
-                elevation={item.elevation}
-                className={paperClass}
-              >
-                <h3 className={classes.data}>{item.y}</h3>
-              </Paper>
-            </Grid>
-          );
-        })}
+        {data.length > 0 ? (
+          data.map((item) => {
+            const paperClass = _getPaperClass(item.color);
+            return (
+              <Grid key={item._id} item>
+                <Paper
+                  variant="elevation"
+                  elevation={item.elevation}
+                  className={paperClass}
+                >
+                  <h3 className={classes.data}>{item.y}</h3>
+                </Paper>
+              </Grid>
+            );
+          })
+        ) : (
+          <Typography className="chart-header" variant="h5">
+            NO DATA TO PROCESS
+          </Typography>
+        )}
       </Grid>
     </Container>
   );

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import DataContext from "../../context/DataContext";
-import { Container, OutlinedInput } from "@material-ui/core";
+import { Container, OutlinedInput, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { search } from "../../algorithms/index";
 import Header from "../header/header";
@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme) => {
       justifyContent: "center",
       alignItems: "center",
     },
+    input: {
+      margin: "auto",
+      width: "5rem",
+    },
   };
 });
 
@@ -27,14 +31,23 @@ function SortingPage() {
   return (
     <Container id="pageContainer" className={classes.root}>
       <Header />
-      <OutlinedInput
-        variant="outlined"
-        size="small"
-        margin="dense"
-        defaultValue={searchItem}
-        onChange={handleChangeSearchItem}
-      />
       <GridDisplay data={data} />
+      <Paper className={classes.input}>
+        <OutlinedInput
+          inputProps={{
+            style: {
+              fontSize: "1.2rem",
+              textAlign: "center",
+              padding: "0.5rem",
+              fontWeight: "bold",
+            },
+          }}
+          size="small"
+          defaultValue={searchItem}
+          onChange={handleChangeSearchItem}
+        />
+      </Paper>
+      <Typography variant="button">Search Item</Typography>
       <Controls algorithms={search} />
     </Container>
   );
