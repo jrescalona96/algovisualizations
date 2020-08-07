@@ -12,6 +12,7 @@ https://jrescalona96.github.io/algovisualizations/
 - Insertion Sort
 - Merge Sort
 - Quick Sort
+- Linear Search
 
 ### Toggle desired algorithm to run
 

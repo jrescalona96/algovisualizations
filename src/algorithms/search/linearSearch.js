@@ -3,8 +3,8 @@ import _ from "lodash";
 
 let snapshots;
 export const linearSearch = ({ workingData, searchItem }) => {
-  const data = [...workingData];
   snapshots = [];
+  const data = [...workingData];
   const result = _linearSearch(data, searchItem);
   return { result, snapshots };
 };

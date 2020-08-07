@@ -23,7 +23,7 @@ function App() {
   const [workingData, setWorkingData] = useState(data);
   const [recordSnapshots, setRecordSnapshots] = useState([]);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState({});
-  const [searchItem, setSearchItem] = useState(96);
+  const [searchItem, setSearchItem] = useState(data[data.length - 2].y);
 
   const resetTimer = () => {
     clearTimeout(timer);
@@ -46,7 +46,6 @@ function App() {
   };
 
   const runVisualization = (snapshots, index) => {
-    setData(snapshots[index].data);
     const currTimer = setTimeout(() => {
       if (index < snapshots.length - 1) {
         runVisualization(snapshots, index + 1);
@@ -54,6 +53,7 @@ function App() {
         resetTimer();
       }
     }, speed);
+    setData(snapshots[index].data);
     setTimer(currTimer);
   };
 
