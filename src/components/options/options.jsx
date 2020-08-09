@@ -11,7 +11,7 @@ function Options() {
     handleChangeDataCount,
   } = useContext(ControlsContext);
 
-  const maxDataCount = 120;
+  const maxDataCount = 200;
   const formattedSpeed = (speed / 1000).toFixed(2);
   const maxSpeed = 1500;
   const speedTitle = `Speed (${formattedSpeed}s)`;

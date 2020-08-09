@@ -1,7 +1,7 @@
 import { linearSearch } from "../linearSearch";
 import { binarySearch } from "../binarySearch";
 
-const testData = [
+const nums = [
   { _id: "a", x: 0, y: 10 },
   { _id: "b", x: 1, y: 5 },
   { _id: "c", x: 2, y: 20 },
@@ -11,28 +11,28 @@ const testData = [
   { _id: "f", x: 6, y: 21 },
   { _id: "g", x: 7, y: 136 },
   { _id: "h", x: 8, y: 17 },
-  { _id: "i", x: 9, y: -25 },
+  { _id: "i", x: 9, y: -5 },
 ];
 
 const existing = 15;
 const absent = 96;
 
 test("run linear search must be true", () => {
-  const { result } = linearSearch(testData, existing);
+  const { result } = linearSearch(nums, existing);
   expect(result).toStrictEqual(true);
 });
 
 test("run linear search must be false", () => {
-  const { result } = linearSearch(testData, absent);
+  const { result } = linearSearch(nums, absent);
   expect(result).toStrictEqual(false);
 });
 
 test("run binary search must be true", () => {
-  const { result } = binarySearch(testData, existing);
+  const { result } = binarySearch(nums, existing);
   expect(result).toStrictEqual(true);
 });
 
 test("run binary search must be false", () => {
-  const { result } = binarySearch(testData, absent);
-  expect(result).toStrictEqual(true);
+  const { result } = binarySearch(nums, absent);
+  expect(result).toStrictEqual(false);
 });
