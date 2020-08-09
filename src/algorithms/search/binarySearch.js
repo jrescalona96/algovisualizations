@@ -4,7 +4,7 @@ let snapshots;
 
 export const binarySearch = (nums, searchItem) => {
   snapshots = [];
-  recordSnapshot(nums, _.range(nums.length), [], snapshots);
+  recordSnapshot(nums, snapshots, _.range(nums.length), []);
   const sorted = _.sortBy(nums, "y");
   const target = Number(searchItem);
   const result = _binarySearch(sorted, target);
@@ -17,9 +17,9 @@ const _binarySearch = (nums, target) => {
   while (start <= end) {
     let mid = Math.floor(start + (end - start) / 2);
     let current = nums[mid].y;
-    recordSnapshot(nums, [mid], _.range(start, end + 1), snapshots);
+    recordSnapshot(nums, snapshots, [mid], _.range(start, end + 1));
     if (target === current) {
-      recordSnapshot(nums, [], [mid], snapshots);
+      recordSnapshot(nums, snapshots, [], [mid]);
       return true;
     }
     if (target > current) {
@@ -27,8 +27,8 @@ const _binarySearch = (nums, target) => {
     } else {
       end = mid - 1;
     }
-    recordSnapshot(nums, [], _.range(start, end + 1), snapshots);
+    recordSnapshot(nums, snapshots, [], _.range(start, end + 1));
   }
-  recordSnapshot(nums, [], [], snapshots);
+  recordSnapshot(nums, snapshots, [], []);
   return false;
 };

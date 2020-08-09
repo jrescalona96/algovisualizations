@@ -8,7 +8,7 @@ export const selectionSort = (workingData) => {
   snapshots = [];
   let data = [...workingData];
   data.length <= 300 ? _selectionSortSmall(data) : _selectionSortLarge(data);
-  recordSnapshot(data, [], _.range(0, data.length), snapshots);
+  recordSnapshot(data, snapshots, [], _.range(0, data.length));
   return { data, snapshots };
 };
 
@@ -20,9 +20,9 @@ const _selectionSortSmall = (data) => {
     minIdx = start;
     for (let i = start; i <= end; i++) {
       if (data[i].y < data[minIdx].y) minIdx = i;
-      recordSnapshot(data, [minIdx], [i, start], snapshots);
+      recordSnapshot(data, snapshots, [minIdx], [i, start]);
     }
-    data = swap(data, start, minIdx);
+    swap(data, start, minIdx);
     start++;
   }
 };
@@ -33,14 +33,14 @@ const _selectionSortLarge = (data) => {
   let minIdx = 0;
 
   while (start <= end) {
-    recordSnapshot(data, [minIdx], [start], snapshots);
+    recordSnapshot(data, snapshots, [minIdx], [start]);
     minIdx = start;
     for (let i = start; i <= end; i++) {
       if (data[i].y < data[minIdx].y) {
         minIdx = i;
       }
     }
-    data = swap(data, start, minIdx);
+    swap(data, start, minIdx);
     start++;
   }
 };

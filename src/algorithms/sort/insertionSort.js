@@ -8,19 +8,19 @@ export const insertionSort = (workingData) => {
   let data = [...workingData];
   snapshots = [];
   _insertionSort(data);
-  recordSnapshot(data, [], _.range(0, data.length), snapshots);
+  recordSnapshot(data, snapshots, [], _.range(0, data.length));
   return { data, snapshots };
 };
 
 const _insertionSort = (data) => {
-  recordSnapshot(data, [], [], snapshots);
+  recordSnapshot(data, snapshots, [], []);
   for (let i = 1; i < data.length; i++) {
-    recordSnapshot(data, [], [i], snapshots);
+    recordSnapshot(data, snapshots, [], [i]);
     for (let j = i; j > 0; j--) {
       if (data[j].y < data[j - 1].y) {
-        recordSnapshot(data, [j], [i, j - 1], snapshots);
-        data = swap(data, j, j - 1);
-        recordSnapshot(data, [j - 1], [i, j], snapshots);
+        recordSnapshot(data, snapshots, [j], [i, j - 1]);
+        swap(data, j, j - 1);
+        recordSnapshot(data, snapshots, [j - 1], [i, j]);
       }
     }
   }

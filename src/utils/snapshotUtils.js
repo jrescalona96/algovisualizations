@@ -15,7 +15,7 @@ export const formatSnapshots = (snapshots) => {
   });
 };
 
-export const recordSnapshot = (data, pNodes, sNodes, existingSnapshots) => {
+export const recordSnapshot = (data, existingSnapshots, pNodes, sNodes) => {
   const newRecord = _createRecord(data, pNodes, sNodes);
   existingSnapshots.push(newRecord);
 };

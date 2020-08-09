@@ -8,23 +8,25 @@ export const mergeSort = (workingData) => {
   snapshots = [];
   let data = [...workingData];
   _mergeSort(data, 0, data.length - 1);
-  recordSnapshot(data, [], _.range(0, data.length), snapshots);
+  recordSnapshot(data, snapshots, [], _.range(0, data.length));
   return { data, snapshots };
 };
 
 const _mergeSort = (data, start, end) => {
   const size = end - start + 1;
   const mid = Math.floor(start + (end - start + 1) / 2);
-  recordSnapshot(data, [mid], [], snapshots);
+  recordSnapshot(data, snapshots, [mid], []);
   if (size > 2) {
     _mergeSort(data, start, mid);
     _mergeSort(data, mid + 1, end);
     _merge(data, start, mid, mid + 1, end);
-    recordSnapshot(data, [], _.range(start, end + 1), snapshots);
+    recordSnapshot(data, snapshots, [], _.range(start, end + 1));
   } else if (size === 2) {
-    recordSnapshot(data, [start, end], [], snapshots);
-    if (data[start].y > data[end].y) swap(data, start, end);
-    recordSnapshot(data, [start], [end], snapshots);
+    recordSnapshot(data, snapshots, [start, end], []);
+    if (data[start].y > data[end].y) {
+      swap(data, start, end);
+    }
+    recordSnapshot(data, snapshots, [start], [end]);
   }
 };
 
@@ -39,17 +41,17 @@ const _merge = (data, leftStart, leftEnd, rightStart, rightEnd) => {
       temp[index] = data[leftCurrent];
       recordSnapshot(
         data,
+        snapshots,
         [leftCurrent, rightCurrent],
-        _.range(leftStart, rightEnd + 1),
-        snapshots
+        _.range(leftStart, rightEnd + 1)
       );
       leftCurrent++;
     } else {
       recordSnapshot(
         data,
+        snapshots,
         [leftCurrent, rightCurrent],
-        _.range(leftStart, rightEnd + 1),
-        snapshots
+        _.range(leftStart, rightEnd + 1)
       );
       temp[index] = data[rightCurrent];
       rightCurrent++;
@@ -66,7 +68,7 @@ const _merge = (data, leftStart, leftEnd, rightStart, rightEnd) => {
   index = leftStart;
   for (let i = 0; i < temp.length; i++) {
     data[index] = temp[i];
-    recordSnapshot(data, [index], _.range(leftStart, rightEnd + 1), snapshots);
+    recordSnapshot(data, snapshots, [index], _.range(leftStart, rightEnd + 1));
     index++;
   }
 };

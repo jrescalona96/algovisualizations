@@ -7,7 +7,7 @@ export const quickSort = (workingData) => {
   snapshots = [];
   let data = [...workingData];
   _quickSort(data, 0, data.length - 1);
-  recordSnapshot(data, [], _.range(0, data.length), snapshots);
+  recordSnapshot(data, snapshots, [], _.range(0, data.length));
   return { data, snapshots };
 };
 
@@ -26,21 +26,21 @@ const _partition = (data, start, end, pivot) => {
   let pivotIndex = data.indexOf(pivot);
   while (start <= end) {
     pivotIndex = data.indexOf(pivot);
-    recordSnapshot(data, [pivotIndex], [start, end], snapshots);
+    recordSnapshot(data, snapshots, [pivotIndex], [start, end]);
     while (data[start].y < pivot.y) {
       start++;
-      recordSnapshot(data, [pivotIndex], [start, end], snapshots);
+      recordSnapshot(data, snapshots, [pivotIndex], [start, end]);
     }
     while (data[end].y > pivot.y) {
       end--;
-      recordSnapshot(data, [pivotIndex], [start, end], snapshots);
+      recordSnapshot(data, snapshots, [pivotIndex], [start, end]);
     }
     if (start <= end) {
-      recordSnapshot(data, [pivotIndex], [start, end], snapshots);
+      recordSnapshot(data, snapshots, [pivotIndex], [start, end]);
       swap(data, start, end);
       pivotIndex = data.indexOf(pivot);
       start++;
-      recordSnapshot(data, [pivotIndex], [start, end], snapshots);
+      recordSnapshot(data, snapshots, [pivotIndex], [start, end]);
       end--;
     }
   }

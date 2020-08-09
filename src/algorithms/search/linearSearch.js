@@ -12,14 +12,14 @@ export const linearSearch = (nums, searchItem) => {
 const _linearSearch = (nums, target) => {
   const end = nums.length - 1;
   for (let i = 0; i <= end; i++) {
-    recordSnapshot(nums, [], [i], snapshots);
+    recordSnapshot(nums, snapshots, _.range(i), [i]);
     let current = nums[i].y;
     if (target === current) {
-      recordSnapshot(nums, [], [i], snapshots);
+      recordSnapshot(nums, snapshots, _.range(i), [i]);
       return true;
     }
-    recordSnapshot(nums, [i], [], snapshots);
+    recordSnapshot(nums, snapshots, [..._.range(i), ...[i]], []);
   }
-  recordSnapshot(nums, _.range(nums.length), [], snapshots);
+  recordSnapshot(nums, snapshots, _.range(nums.length), []);
   return false;
 };
