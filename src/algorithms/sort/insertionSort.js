@@ -1,4 +1,4 @@
-import { swap } from "../../utils/sortUtils";
+import { swap } from "../../utils/algorithmUtils";
 import { recordSnapshot } from "../../utils/snapshotUtils";
 import _ from "lodash";
 
