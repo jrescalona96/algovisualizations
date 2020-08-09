@@ -1,24 +1,25 @@
-import { record } from "../../utils/chartUtils";
+import { recordSnapshot } from "../../utils/snapshotUtils";
 import _ from "lodash";
 
 let snapshots;
-export const linearSearch = ({ workingData, searchItem }) => {
+export const linearSearch = (nums, searchItem) => {
   snapshots = [];
-  const data = [...workingData];
-  const result = _linearSearch(data, searchItem);
+  const target = Number(searchItem);
+  const result = _linearSearch(nums, target);
   return { result, snapshots };
 };
 
-const _linearSearch = (data, searchItem) => {
-  const end = data.length - 1;
+const _linearSearch = (nums, target) => {
+  const end = nums.length - 1;
   for (let i = 0; i <= end; i++) {
-    snapshots = record(data, [], [i], snapshots);
-    if (String(searchItem) === String(data[i].y)) {
-      snapshots = record(data, [], [i], snapshots);
+    recordSnapshot(nums, [], [i], snapshots);
+    let current = nums[i].y;
+    if (target === current) {
+      recordSnapshot(nums, [], [i], snapshots);
       return true;
     }
-    snapshots = record(data, [i], [], snapshots);
+    recordSnapshot(nums, [i], [], snapshots);
   }
-  snapshots = record(data, _.range(data.length), [], snapshots);
+  recordSnapshot(nums, _.range(nums.length), [], snapshots);
   return false;
 };

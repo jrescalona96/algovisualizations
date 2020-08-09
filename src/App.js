@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { generateData } from "./services/testData/data";
-import { mapChartData } from "./utils/chartUtils";
+import { formatSnapshots } from "./utils/snapshotUtils";
 
 import NavBar from "./components/navBar/navBar";
 import HomePage from "./components/homePage/homePage";
@@ -25,24 +25,9 @@ function App() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState({});
   const [searchItem, setSearchItem] = useState(0);
 
-  const resetTimer = () => {
-    clearTimeout(timer);
-    setTimer(0);
-  };
-
   const runAlgorithm = () => {
-    const { snapshots } = selectedAlgorithm.algorithm({
-      workingData,
-      searchItem,
-    });
-    return mapChartData(snapshots);
-  };
-  const resetData = () => {
-    let newData = generateData(dataCount);
-    resetTimer();
-    setWorkingData(newData);
-    setRecordSnapshots([]);
-    setData(newData);
+    const { snapshots } = selectedAlgorithm.algorithm(workingData, searchItem);
+    return snapshots;
   };
 
   const runVisualization = (snapshots, index) => {
@@ -57,10 +42,24 @@ function App() {
     setTimer(currTimer);
   };
 
+  const resetTimer = () => {
+    clearTimeout(timer);
+    setTimer(0);
+  };
+
+  const resetData = () => {
+    let newData = generateData(dataCount);
+    resetTimer();
+    setRecordSnapshots([]);
+    setData(newData);
+    setWorkingData(newData);
+  };
+
   const handleStart = () => {
     const noSnapshotsRecorded = recordSnapshots.length === 0;
     if (noSnapshotsRecorded) {
-      const mapped = runAlgorithm();
+      const snapshots = runAlgorithm();
+      const mapped = formatSnapshots(snapshots);
       setRecordSnapshots(mapped);
       runVisualization(mapped, 0);
     } else {

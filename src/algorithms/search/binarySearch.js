@@ -1,16 +1,11 @@
-import { record } from "../../utils/chartUtils";
-import _ from "lodash";
-
+import { recordSnapshot } from "../../utils/snapshotUtils";
 let snapshots;
 
-export const binarySearch = ({ workingData, searchItem }) => {
-  const data = [...workingData];
+export const binarySearch = (nums, searchItem) => {
   snapshots = [];
-  record(workingData, _.range(data.length), []);
-  const result = _binarySearch(data, searchItem);
+  const target = Number(searchItem.y);
+  const result = _binarySearch(nums, target);
   return { result, snapshots };
 };
 
-const _binarySearch = (workingData, searchItem) => {
-  console.log("binary search for", searchItem, "in", workingData);
-};
+const _binarySearch = (nums, target) => {};

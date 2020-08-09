@@ -1,30 +1,30 @@
-import { record } from "../../utils/chartUtils";
+import { recordSnapshot } from "../../utils/snapshotUtils";
 import { swap } from "../../utils/sortUtils";
 import _ from "lodash";
 
 let snapshots;
 
-export const mergeSort = ({ workingData }) => {
+export const mergeSort = (workingData) => {
   snapshots = [];
   let data = [...workingData];
   _mergeSort(data, 0, data.length - 1);
-  snapshots = record(data, [], _.range(0, data.length), snapshots);
+  recordSnapshot(data, [], _.range(0, data.length), snapshots);
   return { data, snapshots };
 };
 
 const _mergeSort = (data, start, end) => {
   const size = end - start + 1;
   const mid = Math.floor(start + (end - start + 1) / 2);
-  snapshots = record(data, [mid], [], snapshots);
+  recordSnapshot(data, [mid], [], snapshots);
   if (size > 2) {
     _mergeSort(data, start, mid);
     _mergeSort(data, mid + 1, end);
     _merge(data, start, mid, mid + 1, end);
-    snapshots = record(data, [], _.range(start, end + 1), snapshots);
+    recordSnapshot(data, [], _.range(start, end + 1), snapshots);
   } else if (size === 2) {
-    snapshots = record(data, [start, end], [], snapshots);
+    recordSnapshot(data, [start, end], [], snapshots);
     if (data[start].y > data[end].y) swap(data, start, end);
-    snapshots = record(data, [start], [end], snapshots);
+    recordSnapshot(data, [start], [end], snapshots);
   }
 };
 
@@ -37,7 +37,7 @@ const _merge = (data, leftStart, leftEnd, rightStart, rightEnd) => {
   while (leftCurrent <= leftEnd && rightCurrent <= rightEnd) {
     if (data[leftCurrent].y < data[rightCurrent].y) {
       temp[index] = data[leftCurrent];
-      snapshots = record(
+      recordSnapshot(
         data,
         [leftCurrent, rightCurrent],
         _.range(leftStart, rightEnd + 1),
@@ -45,7 +45,7 @@ const _merge = (data, leftStart, leftEnd, rightStart, rightEnd) => {
       );
       leftCurrent++;
     } else {
-      snapshots = record(
+      recordSnapshot(
         data,
         [leftCurrent, rightCurrent],
         _.range(leftStart, rightEnd + 1),
@@ -57,7 +57,6 @@ const _merge = (data, leftStart, leftEnd, rightStart, rightEnd) => {
     index++;
   }
 
-  // add remaining values
   temp = [
     ...temp,
     ...data.slice(leftCurrent, leftEnd + 1),
@@ -67,12 +66,7 @@ const _merge = (data, leftStart, leftEnd, rightStart, rightEnd) => {
   index = leftStart;
   for (let i = 0; i < temp.length; i++) {
     data[index] = temp[i];
-    snapshots = record(
-      data,
-      [index],
-      _.range(leftStart, rightEnd + 1),
-      snapshots
-    );
+    recordSnapshot(data, [index], _.range(leftStart, rightEnd + 1), snapshots);
     index++;
   }
 };

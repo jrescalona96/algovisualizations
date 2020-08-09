@@ -1,24 +1,7 @@
-export const record = (data, pNodes, sNodes, snapshots) => {
-  let update = [...snapshots];
-
-  update.push({
-    name: `Pass #${update.length}`,
-    data: [...data],
-    primaryNodes: _getFocusNodeIds(pNodes, data),
-    secondaryNodes: _getFocusNodeIds(sNodes, data),
-  });
-
-  return update;
-};
-
-const _getFocusNodeIds = (nodes, data) => {
-  return nodes.map((nodeIndex) => data[nodeIndex]._id);
-};
-
-export const mapChartData = (snapshots) => {
+export const formatSnapshots = (snapshots) => {
   return snapshots.map((iter) => {
     let x = 0;
-    const { name, data } = iter;
+    const { data } = iter;
     const snapshot = data.map((item) => {
       let record = { ...item };
       record.x = x++;
@@ -28,8 +11,25 @@ export const mapChartData = (snapshots) => {
       record.opacity = _getOpacity(item._id, iter);
       return record;
     });
-    return { name, data: snapshot };
+    return { data: snapshot };
   });
+};
+
+export const recordSnapshot = (data, pNodes, sNodes, existingSnapshots) => {
+  const newRecord = _createRecord(data, pNodes, sNodes);
+  existingSnapshots.push(newRecord);
+};
+
+const _createRecord = (data, pNodes, sNodes) => {
+  return {
+    data: [...data],
+    primaryNodes: _getFocusNodeIds(pNodes, data),
+    secondaryNodes: _getFocusNodeIds(sNodes, data),
+  };
+};
+
+const _getFocusNodeIds = (nodes, data) => {
+  return nodes.map((nodeIndex) => data[nodeIndex]._id);
 };
 
 const _getOpacity = (_id, iter) => {
@@ -39,9 +39,7 @@ const _getOpacity = (_id, iter) => {
 
 const _getColor = (_id, iter) => {
   const { primaryNodes, secondaryNodes } = iter;
-  //red
   if (primaryNodes.includes(_id)) return 2;
-  //blue
   else if (secondaryNodes.includes(_id)) return 1;
-  else return 0; // orange
+  else return 0;
 };

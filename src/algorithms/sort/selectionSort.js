@@ -1,14 +1,14 @@
 import { swap } from "../../utils/sortUtils";
-import { record } from "../../utils/chartUtils";
+import { recordSnapshot } from "../../utils/snapshotUtils";
 import _ from "lodash";
 
 let snapshots;
 
-export const selectionSort = ({ workingData }) => {
+export const selectionSort = (workingData) => {
   snapshots = [];
   let data = [...workingData];
   data.length <= 300 ? _selectionSortSmall(data) : _selectionSortLarge(data);
-  snapshots = record(data, [], _.range(0, data.length), snapshots);
+  recordSnapshot(data, [], _.range(0, data.length), snapshots);
   return { data, snapshots };
 };
 
@@ -20,7 +20,7 @@ const _selectionSortSmall = (data) => {
     minIdx = start;
     for (let i = start; i <= end; i++) {
       if (data[i].y < data[minIdx].y) minIdx = i;
-      snapshots = record(data, [minIdx], [i, start], snapshots);
+      recordSnapshot(data, [minIdx], [i, start], snapshots);
     }
     data = swap(data, start, minIdx);
     start++;
@@ -33,7 +33,7 @@ const _selectionSortLarge = (data) => {
   let minIdx = 0;
 
   while (start <= end) {
-    snapshots = record(data, [minIdx], [start], snapshots);
+    recordSnapshot(data, [minIdx], [start], snapshots);
     minIdx = start;
     for (let i = start; i <= end; i++) {
       if (data[i].y < data[minIdx].y) {

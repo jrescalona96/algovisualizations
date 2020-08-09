@@ -17,25 +17,22 @@ const testData = [
 const existing = 15;
 const absent = 96;
 
-const successInput = { workingData: testData, searchItem: existing };
-const failInput = { workingData: testData, searchItem: absent };
-
 test("run linear search must be true", () => {
-  const { result } = linearSearch(successInput);
+  const { result } = linearSearch(testData, existing);
   expect(result).toStrictEqual(true);
 });
 
 test("run linear search must be false", () => {
-  const { result } = linearSearch(failInput);
+  const { result } = linearSearch(testData, absent);
   expect(result).toStrictEqual(false);
 });
 
-// test("run binary search must be true", () => {
-//   const { result } = binarySearch(successInput);
-//   expect(result).toStrictEqual(true);
-// });
+test("run binary search must be true", () => {
+  const { result } = binarySearch(testData, existing);
+  expect(result).toStrictEqual(true);
+});
 
-// test("run binary search must be false", () => {
-//   const { result } = binarySearch(failInput);
-//   expect(result).toStrictEqual(true);
-// });
+test("run binary search must be false", () => {
+  const { result } = binarySearch(testData, absent);
+  expect(result).toStrictEqual(true);
+});
