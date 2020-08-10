@@ -13,7 +13,7 @@ https://jrescalona96.github.io/algovisualizations/
 - Merge Sort
 - Quick Sort
 - Linear Search
-- Bubble Search
+- Binary Search
 
 ### Toggle desired algorithm to run
 
