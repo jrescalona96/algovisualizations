@@ -15,13 +15,19 @@ https://jrescalona96.github.io/algovisualizations/
 - Linear Search
 - Binary Search
 
-### Toggle desired algorithm to run
+### - Toggle desired algorithm to run
 
-![Algorithm Picker](https://github.com/jrescalona96/algovisualizations/blob/master/public/demopic1.png)
+### - Drag slider to change speed of simulation.
 
-### Drag slider to change speed of simulation.
+### - Drag slider to increase or decrease the number of working data. To see the values of each data item, decrease working data set to at most 50.
 
-### Drag slider to increase or decrease the number of working data. To see the values of each data item, decrease working data set to at most 50.
+### - "RESET" to change data set values
+
+### - "START" to run the simulation
+
+![Algorithm Picker & Controls](https://github.com/jrescalona96/algovisualizations/blob/master/public/demopic1.png)
+
+### - For searching algorithms Specify search item on input before running search.
 
 ![Sliders](https://github.com/jrescalona96/algovisualizations/blob/master/public/demopic2.png)
 
